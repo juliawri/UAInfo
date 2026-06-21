@@ -14,6 +14,8 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="community.html" class="active">Problem &amp; Community</a></li>
     <li><a href="pipeline.html">ML Pipeline</a></li>
+    <li><a href="dataset.html">Dataset</a></li>
+    <li><a href="ethics.html">Ethics</a></li>
     <li><a href="application.html">The App</a></li>
     <li><a href="impact.html">Impact &amp; Vision</a></li>
   </ul>
@@ -129,61 +131,8 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Ground-Truth Survey Campaign</h2>
-      <p class="lead">To build credible accessibility labels, the team conducted a structured survey campaign — presenting real Montreal street images to community members and disability advocates for manual rating.</p>
-
-      <div class="two-col">
-        <div>
-          <p>Survey responses could not serve as direct training labels at this scale — 154 ratings across 76 images is too small to train a Vision Transformer from scratch. But they served two critical functions:</p>
-          <ul class="styled-list mt-2 mb-2">
-            <li><strong>Calibration:</strong> The survey statistics (mean and standard deviation per mobility aid type) were used to recalibrate AI-generated labels from Gemini 2.5 Flash to match human perception. See <a href="pipeline.html">ML Pipeline</a> for the full methodology.</li>
-            <li><strong>Validation:</strong> The survey provided partial external validation of the VLM scoring approach — evidence that human raters and AI raters are measuring something comparable, even if not identical.</li>
-          </ul>
-          <p>All survey data was fully anonymised. Participants rated street images only — no personally identifiable information was collected.</p>
-        </div>
-        <div>
-          <div class="img-placeholder">
-            <span class="ph-icon">📋</span>
-            <p class="ph-title">Survey Interface Screenshot</p>
-            <p class="ph-hint">Replace with: images/survey-screenshot.jpg</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="table-wrap mt-4">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Dimension</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Distribution channels</td><td>30+ disability-focused community groups across Montreal, including Promo-Accès</td></tr>
-            <tr><td>Responses collected</td><td>154 rated image–aid pairs across 76 unique street images</td></tr>
-            <tr><td>Aid types covered</td><td>Manual wheelchair, electric wheelchair, walker, walking cane, mobility scooter, mobility impairment without aid</td></tr>
-            <tr><td>Rating scale</td><td>0–4 (0 = completely inaccessible, 4 = fully accessible)</td></tr>
-            <tr><td>Data handling</td><td>Fully anonymised; no personally identifiable information collected; participants rated images only</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="subsection">Survey Statistics by Mobility Aid</h3>
-      <p>These statistics were used to recalibrate AI-generated accessibility scores before binarization. See the <a href="pipeline.html">ML Pipeline</a> page for how this works.</p>
-      <div class="table-wrap mt-3">
-        <table class="data-table">
-          <thead>
-            <tr><th>Mobility Aid Type</th><th>Survey Responses (n)</th><th>Mean Score</th><th>Std Dev</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Manual wheelchair</td><td>20</td><td>2.200</td><td>1.005</td></tr>
-            <tr><td>Electric wheelchair</td><td>54</td><td>2.704</td><td>1.039</td></tr>
-            <tr><td>Walker</td><td>38</td><td>2.211</td><td>1.069 (raw scores used — no recalibration)</td></tr>
-            <tr><td>Walking cane</td><td>40</td><td>2.400</td><td>1.033</td></tr>
-            <tr><td>Mobility scooter</td><td>n/a</td><td>2.727 (global fallback)</td><td>1.122</td></tr>
-            <tr><td>Mobility impairment, no aid</td><td>40</td><td>3.050</td><td>1.260</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <p class="lead">The team ran a structured survey across 30+ Montreal disability groups — 154 rated image–aid pairs used to calibrate AI-generated accessibility labels. Full data and methodology on the Dataset page.</p>
+      <p class="mt-3"><a href="dataset.html" class="btn btn-orange" style="display:inline-block">Full Dataset Story &rarr;</a></p>
     </div>
   </section>
 
@@ -192,25 +141,8 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Privacy as a Design Principle</h2>
-      <p class="lead">Ethical data practices were embedded from the outset — not added as an afterthought. This applies to both the survey data used to calibrate our labels and the user data collected by the application.</p>
-
-      <div class="cards">
-        <div class="card">
-          <span class="card-icon">🔒</span>
-          <h3>Anonymised Survey Data</h3>
-          <p>The 154 community ratings used to calibrate our AI-generated labels contain no personally identifiable information. Participants rated images only.</p>
-        </div>
-        <div class="card">
-          <span class="card-icon">🗑️</span>
-          <h3>User Data Control</h3>
-          <p>App users can delete their account and all associated feedback data at any time from within the application. No lock-in; meaningful data agency.</p>
-        </div>
-        <div class="card">
-          <span class="card-icon">🛡️</span>
-          <h3>Secure Storage</h3>
-          <p>User accounts and feedback are stored in Supabase with enterprise-grade security including row-level access controls. No movement data is retained beyond what is needed for feedback weighting.</p>
-        </div>
-      </div>
+      <p class="lead">Ethical data practices — from anonymised survey data to user account deletion and secure Supabase storage — are documented in full on the Ethics page.</p>
+      <p class="mt-3"><a href="ethics.html" class="btn btn-orange" style="display:inline-block">Ethics &amp; Privacy &rarr;</a></p>
     </div>
   </section>
 
@@ -234,6 +166,8 @@
       <a href="index.html">Home</a>
       <a href="community.html">Problem &amp; Community</a>
       <a href="pipeline.html">ML Pipeline</a>
+      <a href="dataset.html">Dataset</a>
+      <a href="ethics.html">Ethics</a>
       <a href="application.html">The App</a>
       <a href="impact.html">Impact &amp; Vision</a>
     </nav>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethics — Urban Access</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="brand">Urban<span>Access</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="community.html">Problem &amp; Community</a></li>
+    <li><a href="pipeline.html">ML Pipeline</a></li>
+    <li><a href="dataset.html">Dataset</a></li>
+    <li><a href="ethics.html" class="active">Ethics</a></li>
+    <li><a href="application.html">The App</a></li>
+    <li><a href="impact.html">Impact &amp; Vision</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<main>
+
+  <div class="page-hero">
+    <h1>Ethics</h1>
+    <p>Ethical considerations were embedded at every stage of the project — not treated as a compliance checklist at the end.</p>
+  </div>
+
+  <!-- ── ETHICS BY DESIGN ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <h2 class="section-title">Ethics By Design</h2>
+      <p class="lead">Urban Access was built with ethical AI practices as a first principle — shaping the problem definition, data collection, model training, and output design.</p>
+
+      <div class="two-col">
+        <div>
+          <h3 class="subsection" style="margin-top:0">Community-Led Design</h3>
+          <p>The routing focus, survey design, label categories, and output format were all shaped by consultation with Rashid Mushkani and ongoing feedback from Laurence Parent. The system reflects genuine disability needs — not assumptions made by the team on their behalf.</p>
+
+          <h3 class="subsection">Label Bias Mitigation</h3>
+          <p>The recalibration procedure is an active, methodological response to AI bias: it reduces the risk that AI-generated labels systematically misrepresent human accessibility judgements by anchoring them to human survey distributions before binarization.</p>
+
+          <h3 class="subsection">Representation</h3>
+          <p>Supporting six distinct mobility aid types ensures the system does not treat mobility impairment as monolithic. A manual wheelchair user and an electric wheelchair user have fundamentally different requirements — and the model captures this distinction explicitly.</p>
+        </div>
+        <div>
+          <h3 class="subsection" style="margin-top:0">Data Privacy</h3>
+          <p>Survey data: fully anonymised. User accounts: secured in Supabase with row-level access controls. Account deletion: available any time. No movement data retained beyond what is needed for feedback weighting.</p>
+
+          <h3 class="subsection">Honest Limitations</h3>
+          <p>The VLM validation study found non-significant correlation between AI scores and human ground truth — and we report this openly. The n=18 sample is underpowered, and more validation is needed. The MAE training was halted at 95/200 planned epochs. The walker class has lower F1 performance and known imbalance. These limitations are documented, not concealed.</p>
+
+          <h3 class="subsection">No Over-Reliance</h3>
+          <p>The system provides route recommendations as <em>suggestions with explained reasoning</em>, not authoritative directives. Users retain agency and are expected to apply their own judgement alongside the system's output.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRIVACY ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <h2 class="section-title">Privacy as a Design Principle</h2>
+      <p class="lead">Ethical data practices were embedded from the outset — not added as an afterthought. This applies to both the survey data used to calibrate our labels and the user data collected by the application.</p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🔒</span>
+          <h3>Anonymised Survey Data</h3>
+          <p>The 154 community ratings used to calibrate our AI-generated labels contain no personally identifiable information. Participants rated images only.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🗑️</span>
+          <h3>User Data Control</h3>
+          <p>App users can delete their account and all associated feedback data at any time from within the application. No lock-in; meaningful data agency.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🛡️</span>
+          <h3>Secure Storage</h3>
+          <p>User accounts and feedback are stored in Supabase with enterprise-grade security including row-level access controls. No movement data is retained beyond what is needed for feedback weighting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NEXT PAGE ── -->
+  <section class="section-sm section-dark text-center">
+    <div class="container">
+      <p style="opacity:0.75;margin-bottom:1rem">Next: Impact, scalability, and the road ahead</p>
+      <a href="impact.html" class="btn btn-orange">Impact &amp; Vision &rarr;</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="brand">Urban<span>Access</span></span>
+      <p>AI-powered accessible routing for Montreal.<br>Built at the AI4Good Lab — Demo Day 2026.</p>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="community.html">Problem &amp; Community</a>
+      <a href="pipeline.html">ML Pipeline</a>
+      <a href="dataset.html">Dataset</a>
+      <a href="ethics.html">Ethics</a>
+      <a href="application.html">The App</a>
+      <a href="impact.html">Impact &amp; Vision</a>
+    </nav>
+  </div>
+  <div class="footer-copyright">AI4Good Lab &middot; Montreal &middot; June 2026</div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

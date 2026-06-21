@@ -14,6 +14,8 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="community.html">Problem &amp; Community</a></li>
     <li><a href="pipeline.html">ML Pipeline</a></li>
+    <li><a href="dataset.html">Dataset</a></li>
+    <li><a href="ethics.html">Ethics</a></li>
     <li><a href="application.html">The App</a></li>
     <li><a href="impact.html" class="active">Impact &amp; Vision</a></li>
   </ul>
@@ -103,30 +105,8 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Ethics By Design</h2>
-      <p class="lead">Ethical considerations were embedded at every stage of the project — not treated as a compliance checklist at the end.</p>
-
-      <div class="two-col">
-        <div>
-          <h3 class="subsection" style="margin-top:0">Community-Led Design</h3>
-          <p>The routing focus, survey design, label categories, and output format were all shaped by consultation with Rashid Mushkani and ongoing feedback from Laurence Parent. The system reflects genuine disability needs — not assumptions made by the team on their behalf.</p>
-
-          <h3 class="subsection">Label Bias Mitigation</h3>
-          <p>The recalibration procedure is an active, methodological response to AI bias: it reduces the risk that AI-generated labels systematically misrepresent human accessibility judgements by anchoring them to human survey distributions before binarization.</p>
-
-          <h3 class="subsection">Representation</h3>
-          <p>Supporting six distinct mobility aid types ensures the system does not treat mobility impairment as monolithic. A manual wheelchair user and an electric wheelchair user have fundamentally different requirements — and the model captures this distinction explicitly.</p>
-        </div>
-        <div>
-          <h3 class="subsection" style="margin-top:0">Data Privacy</h3>
-          <p>Survey data: fully anonymised. User accounts: secured in Supabase with row-level access controls. Account deletion: available any time. No movement data retained beyond what is needed for feedback weighting.</p>
-
-          <h3 class="subsection">Honest Limitations</h3>
-          <p>The VLM validation study found non-significant correlation between AI scores and human ground truth — and we report this openly. The n=18 sample is underpowered, and more validation is needed. The MAE training was halted at 95/200 planned epochs. The walker class has lower F1 performance and known imbalance. These limitations are documented, not concealed.</p>
-
-          <h3 class="subsection">No Over-Reliance</h3>
-          <p>The system provides route recommendations as <em>suggestions with explained reasoning</em>, not authoritative directives. Users retain agency and are expected to apply their own judgement alongside the system's output.</p>
-        </div>
-      </div>
+      <p class="lead">Community-led design, label bias mitigation, data privacy, and honest documentation of limitations — all covered in full on the Ethics page.</p>
+      <p class="mt-3"><a href="ethics.html" class="btn btn-orange" style="display:inline-block">Full Ethics Page &rarr;</a></p>
     </div>
   </section>
 
@@ -287,6 +267,8 @@
       <a href="index.html">Home</a>
       <a href="community.html">Problem &amp; Community</a>
       <a href="pipeline.html">ML Pipeline</a>
+      <a href="dataset.html">Dataset</a>
+      <a href="ethics.html">Ethics</a>
       <a href="application.html">The App</a>
       <a href="impact.html">Impact &amp; Vision</a>
     </nav>

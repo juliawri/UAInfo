@@ -14,6 +14,8 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="community.html">Problem &amp; Community</a></li>
     <li><a href="pipeline.html" class="active">ML Pipeline</a></li>
+    <li><a href="dataset.html">Dataset</a></li>
+    <li><a href="ethics.html">Ethics</a></li>
     <li><a href="application.html">The App</a></li>
     <li><a href="impact.html">Impact &amp; Vision</a></li>
   </ul>
@@ -86,74 +88,8 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Dataset Creation</h2>
-      <p class="lead">No publicly available dataset combined street-level imagery with per-mobility-aid accessibility labels at scale for Canadian cities. We built one.</p>
-
-      <h3 class="subsection">Image Collection via Mapillary</h3>
-      <div class="two-col">
-        <div>
-          <p>Mapillary is an open-source, crowd-sourced street-level imagery platform — similar to Google Street View but with a public API and no licensing restrictions. Images were retrieved by geographic coordinate, allowing structured collection across Montreal.</p>
-          <ul class="styled-list mt-2 mb-2">
-            <li>Coordinates sampled near Montreal transit stations (bus stops, metro stations) and across Montreal Island</li>
-            <li>~14,000 unique coordinate locations collected</li>
-            <li>Multiple view angles captured per location where available</li>
-            <li>Images stored as <code style="background:var(--bg-off);padding:0.1em 0.3em;border-radius:3px;font-size:0.85em">{latitude}_{longitude}_{view_angle}.jpg</code></li>
-            <li>Three separate data collection repositories contributed images</li>
-          </ul>
-          <p>Images from all three sources were also used in the MAE pre-training phase.</p>
-        </div>
-        <div>
-          <div class="img-placeholder">
-            <span class="ph-icon">🛰️</span>
-            <p class="ph-title">Mapillary coverage map for Montreal</p>
-            <p class="ph-hint">Replace with: images/mapillary-coverage.jpg</p>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="subsection">AI Labelling with Gemini 2.5 Flash</h3>
-      <p>Manual labelling of 14,000+ locations across six mobility aid types would require approximately 500,000 individual human ratings — infeasible at project scale. Instead, Gemini 2.5 Flash was used to generate accessibility scores programmatically.</p>
-      <p>For each image, Gemini was prompted to rate accessibility for each mobility aid type on a 0–4 integer scale, with a structured text justification. Total output: <strong>31,887 labelled rows</strong>.</p>
-
-      <div class="table-wrap mt-3">
-        <table class="data-table">
-          <thead><tr><th>Mobility Aid Type</th><th>Gemini Mean Score</th><th>Gemini Std Dev</th></tr></thead>
-          <tbody>
-            <tr><td>Manual wheelchair</td><td>2.235</td><td>1.236</td></tr>
-            <tr><td>Electric wheelchair</td><td>(calibrated to survey)</td><td>—</td></tr>
-            <tr><td>Walker</td><td>2.611</td><td>1.448</td></tr>
-            <tr><td>Walking cane</td><td>(calibrated to survey)</td><td>—</td></tr>
-            <tr><td>Mobility scooter</td><td>(global fallback used)</td><td>—</td></tr>
-            <tr><td>Mobility impairment, no aid</td><td>(calibrated to survey)</td><td>—</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="subsection">Label Calibration — A Novel Methodological Contribution</h3>
-      <p>Raw Gemini scores have a different statistical distribution than human survey ratings — a systematic bias arising from the model's different interpretation of the 0–4 scale. Left uncorrected, training labels would be systematically offset from human judgement.</p>
-      <p>The recalibration procedure uses z-score normalisation to map Gemini scores into the same mean and standard deviation as the human survey responses for each mobility aid type, then applies a binary threshold:</p>
-
-      <div class="formula-box">
-        <div class="formula-line">z = (gemini_score &minus; &mu;_gemini) / (&sigma;_gemini + &epsilon;)</div>
-        <div class="formula-line">recalibrated = z &times; &sigma;_survey + &mu;_survey</div>
-        <div class="formula-line">binary_label = 1 &nbsp;if&nbsp; recalibrated &ge; 2.5 &nbsp;else&nbsp; 0</div>
-        <div class="formula-caption">This ensures binary labels reflect human-calibrated thresholds rather than raw model outputs — an active, principled response to AI bias in label generation.</div>
-      </div>
-
-      <h3 class="subsection">Class Balance After Binarization</h3>
-      <div class="table-wrap">
-        <table class="data-table">
-          <thead><tr><th>Mobility Aid Type</th><th>Accessible (1)</th><th>Inaccessible (0)</th></tr></thead>
-          <tbody>
-            <tr><td>Manual wheelchair</td><td>63.2%</td><td>36.8%</td></tr>
-            <tr><td>Electric wheelchair</td><td>76.8%</td><td>23.2%</td></tr>
-            <tr><td>Walker</td><td>30.3%</td><td>69.7%</td></tr>
-            <tr><td>Walking cane</td><td>74.8%</td><td>25.2%</td></tr>
-            <tr><td>Mobility scooter</td><td>76.8%</td><td>23.2%</td></tr>
-            <tr><td>Mobility impairment, no aid</td><td>74.8%</td><td>25.2%</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="text-small text-muted mt-2">The walker class is notably imbalanced (30.3% accessible). This reflects that walker raw Gemini scores were not recalibrated, and the 2.611 mean score placed many locations below the 2.5 binary threshold. This imbalance was one factor explored during ViT fine-tuning.</p>
+      <p class="lead">The full dataset story — image collection via Mapillary, AI labelling with Gemini 2.5 Flash, label calibration, and community ground-truth survey — is documented on the Dataset page.</p>
+      <p class="mt-3"><a href="dataset.html" class="btn btn-orange" style="display:inline-block">View the Dataset &rarr;</a></p>
     </div>
   </section>
 
@@ -444,6 +380,8 @@
       <a href="index.html">Home</a>
       <a href="community.html">Problem &amp; Community</a>
       <a href="pipeline.html">ML Pipeline</a>
+      <a href="dataset.html">Dataset</a>
+      <a href="ethics.html">Ethics</a>
       <a href="application.html">The App</a>
       <a href="impact.html">Impact &amp; Vision</a>
     </nav>
