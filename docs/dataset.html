@@ -33,6 +33,7 @@
   <!-- ── ACCESSIBILITY MAP ── -->
   <section class="section">
     <div class="container">
+      <h2 class="section-title" style="margin-bottom:1.5rem">Explore our Dataset</h2>
       <div class="map-panel">
         <div class="map-panel-header">
           <span class="map-panel-title">Montreal — Sidewalk Accessibility</span>
@@ -234,13 +235,13 @@
   });
 
   (function () {
-    // dark teal (#1e3d3d) → teal-mid → teal-light → sky-dark → sky (#cce8f4)
+    // sky (#cce8f4) → sky-dark → teal-light → teal-mid → dark teal (#1e3d3d)
     var STOPS = [
-      [0, [30,  61,  61 ]],
-      [1, [45,  90,  90 ]],
+      [0, [204, 232, 244]],
+      [1, [157, 205, 232]],
       [2, [61,  112, 112]],
-      [3, [157, 205, 232]],
-      [4, [204, 232, 244]]
+      [3, [45,  90,  90 ]],
+      [4, [30,  61,  61 ]]
     ];
 
     function scoreColor(s) {
@@ -254,7 +255,7 @@
           return 'rgb(' + r + ',' + g + ',' + b + ')';
         }
       }
-      return 'rgb(204,232,244)';
+      return 'rgb(30,61,61)';
     }
 
     var AIDS = [
