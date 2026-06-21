@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impact &amp; Vision — Urban Access</title>
   <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="leaflet.css">
 </head>
 <body>
 
@@ -56,10 +57,37 @@
         </div>
       </div>
 
-      <div class="img-placeholder mt-4">
-        <span class="ph-icon">📍</span>
-        <p class="ph-title">Accessibility scores map for Montreal</p>
-        <p class="ph-hint">Replace with: images/accessibility-heatmap.jpg</p>
+      <div class="map-panel mt-4">
+        <div class="map-panel-header" style="justify-content:space-between;flex-wrap:wrap;gap:0.5rem">
+          <div>
+            <span class="map-panel-title">Montreal — Sidewalk Accessibility</span>
+            <span class="map-panel-sub">14,000+ locations · warmer = less accessible</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem">
+            <select id="impact-aid" class="map-select">
+              <option value="avg">All aids (avg)</option>
+              <option value="0">Manual Wheelchair</option>
+              <option value="1">Electric Wheelchair</option>
+              <option value="2">Walker</option>
+              <option value="3">Walking Cane</option>
+              <option value="4">Mobility Scooter</option>
+            </select>
+            <div class="map-view-toggle">
+              <button class="mvt-btn active" id="impact-btn-heat">Heat Map</button>
+              <button class="mvt-btn" id="impact-btn-dots">Points</button>
+            </div>
+          </div>
+        </div>
+        <div id="impact-map"></div>
+        <div class="map-legend">
+          <div class="legend-gradient-bar legend-heat" id="impact-legend-bar"></div>
+          <div class="legend-labels" id="impact-legend-labels">
+            <span>Accessible</span>
+            <span>Moderate</span>
+            <span>Inaccessible</span>
+          </div>
+          <p class="legend-caption" id="impact-legend-cap">Heat intensity = inaccessibility. Red/orange areas have the most barriers — strongest case for infrastructure investment.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -276,10 +304,126 @@
   <div class="footer-copyright">AI4Good Lab &middot; Montreal &middot; June 2026</div>
 </footer>
 
+<script src="leaflet.js"></script>
+<script src="leaflet-heat.js"></script>
+<script src="map-data.js"></script>
 <script>
   document.getElementById('hamburger').addEventListener('click', function() {
     document.getElementById('navLinks').classList.toggle('open');
   });
+
+  (function () {
+    var STOPS = [
+      [0, [30,  61,  61]],
+      [1, [45,  90,  90]],
+      [2, [61,  112, 112]],
+      [3, [157, 205, 232]],
+      [4, [204, 232, 244]]
+    ];
+
+    function scoreColor(s) {
+      s = Math.max(0, Math.min(4, s));
+      for (var i = 1; i < STOPS.length; i++) {
+        if (s <= STOPS[i][0]) {
+          var t = (s - STOPS[i-1][0]) / (STOPS[i][0] - STOPS[i-1][0]);
+          var r = Math.round(STOPS[i-1][1][0] + t * (STOPS[i][1][0] - STOPS[i-1][1][0]));
+          var g = Math.round(STOPS[i-1][1][1] + t * (STOPS[i][1][1] - STOPS[i-1][1][1]));
+          var b = Math.round(STOPS[i-1][1][2] + t * (STOPS[i][1][2] - STOPS[i-1][1][2]));
+          return 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+      }
+      return 'rgb(204,232,244)';
+    }
+
+    function getScore(pt, aidKey) {
+      if (aidKey === 'avg') return pt.avg;
+      var idx = +aidKey;
+      return (pt.aids[idx] !== null && pt.aids[idx] !== undefined) ? pt.aids[idx] : pt.avg;
+    }
+
+    var map = L.map('impact-map', {
+      center: [45.53, -73.62],
+      zoom: 12,
+      renderer: L.canvas({ padding: 0.5 })
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
+    }).addTo(map);
+
+    function buildHeatData(aidKey) {
+      return MAP_DATA.map(function(pt) {
+        var weight = (4 - getScore(pt, aidKey)) / 4;
+        return [pt.lat, pt.lon, Math.max(0.05, weight)];
+      });
+    }
+
+    var heatLayer = L.heatLayer(buildHeatData('avg'), {
+      radius: 18,
+      blur: 15,
+      maxZoom: 17,
+      gradient: {0.35: '#2d7070', 0.55: '#f5a623', 0.8: '#e05e00', 1.0: '#c0392b'}
+    }).addTo(map);
+
+    var dotsGroup = L.layerGroup();
+
+    function buildDots(aidKey) {
+      dotsGroup.clearLayers();
+      MAP_DATA.forEach(function(pt) {
+        var score = getScore(pt, aidKey);
+        L.circleMarker([pt.lat, pt.lon], {
+          radius: 4,
+          fillColor: scoreColor(score),
+          color: 'rgba(0,0,0,0.1)',
+          weight: 0.5,
+          fillOpacity: 0.8
+        }).addTo(dotsGroup);
+      });
+    }
+
+    var currentView = 'heat';
+    var aidSelect   = document.getElementById('impact-aid');
+    var btnHeat     = document.getElementById('impact-btn-heat');
+    var btnDots     = document.getElementById('impact-btn-dots');
+    var legendBar   = document.getElementById('impact-legend-bar');
+    var legendLbls  = document.getElementById('impact-legend-labels');
+    var legendCap   = document.getElementById('impact-legend-cap');
+
+    btnHeat.addEventListener('click', function() {
+      if (currentView === 'heat') return;
+      currentView = 'heat';
+      btnHeat.classList.add('active');
+      btnDots.classList.remove('active');
+      if (map.hasLayer(dotsGroup)) map.removeLayer(dotsGroup);
+      heatLayer.addTo(map);
+      legendBar.className = 'legend-gradient-bar legend-heat';
+      legendLbls.innerHTML = '<span>Accessible</span><span>Moderate</span><span>Inaccessible</span>';
+      legendCap.textContent = 'Heat intensity = inaccessibility. Red/orange areas have the most barriers — strongest case for infrastructure investment.';
+    });
+
+    btnDots.addEventListener('click', function() {
+      if (currentView === 'dots') return;
+      currentView = 'dots';
+      btnDots.classList.add('active');
+      btnHeat.classList.remove('active');
+      map.removeLayer(heatLayer);
+      buildDots(aidSelect.value);
+      dotsGroup.addTo(map);
+      legendBar.className = 'legend-gradient-bar';
+      legendLbls.innerHTML = '<span>0 — Inaccessible</span><span>2 — Moderate</span><span>4 — Accessible</span>';
+      legendCap.textContent = 'Score per location. Sky-blue = accessible, dark teal = inaccessible.';
+    });
+
+    aidSelect.addEventListener('change', function() {
+      if (currentView === 'heat') {
+        heatLayer.setLatLngs(buildHeatData(this.value));
+      } else {
+        buildDots(this.value);
+      }
+    });
+  })();
 </script>
 </body>
 </html>
