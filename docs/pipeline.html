@@ -98,24 +98,26 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Masked Autoencoder (MAE) Pre-Training</h2>
-      <p class="lead">Before fine-tuning for accessibility classification, the model was pre-trained on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (sourced via Project Sidewalk) using self-supervised Masked Autoencoder methodology — giving it a head start on the visual features that matter for sidewalk accessibility assessment.</p>
+      <p class="lead">Before fine-tuning for accessibility classification, the model was pre-trained on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (sourced via Project Sidewalk and Mapillary) using self-supervised Masked Autoencoder methodology, giving it a head start on the visual features that matter for sidewalk accessibility assessment.</p>
 
       <div class="two-col">
         <div>
-          <p>A ViT pre-trained on ImageNet learns general visual features but has no specific knowledge of street-level images, sidewalk surfaces, kerbs, ramps, or urban geometry. MAE pre-training on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (sourced via Project Sidewalk) addresses this by teaching the model to reconstruct masked patches — a self-supervised task that forces learning of domain-relevant structure without any labels.</p>
-          <p>The MAE encoder (~85M parameters of a ViT-Base architecture) was then used as the backbone initialisation for all subsequent supervised fine-tuning passes — replacing the standard ImageNet starting point.</p>
+          <p>A ViT pre-trained on ImageNet learns general visual features but has no specific knowledge of street-level images, sidewalk surfaces, kerbs, ramps, or urban geometry. MAE pre-training on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle addresses this by teaching the model to reconstruct masked patches, a self-supervised task that forces learning of domain-relevant structure without any labels.</p>
+          <p>The MAE encoder (~85M parameters of a Vision Transformer-Base architecture) was then used as the backbone initialisation for all subsequent supervised fine-tuning passes and replaced the standard ImageNet starting point.</p>
         </div>
         <div>
-          <div style="display:flex;gap:0.75rem;justify-content:center;align-items:flex-start">
-            <figure style="margin:0;text-align:center;flex:1">
-              <img src="images/mae_original.png" alt="Original street image" style="width:100%;border-radius:6px;border:1px solid var(--border)">
-              <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Original</figcaption>
-            </figure>
-            <figure style="margin:0;text-align:center;flex:1">
-              <img src="images/mae_masked_input.png" alt="Image with patches masked" style="width:100%;border-radius:6px;border:1px solid var(--border)">
-              <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Masked input</figcaption>
-            </figure>
-            <figure style="margin:0;text-align:center;flex:1">
+          <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center">
+            <div style="display:flex;gap:0.75rem;justify-content:center;width:100%">
+              <figure style="margin:0;text-align:center;flex:1">
+                <img src="images/mae_original.png" alt="Original street image" style="width:100%;border-radius:6px;border:1px solid var(--border)">
+                <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Original</figcaption>
+              </figure>
+              <figure style="margin:0;text-align:center;flex:1">
+                <img src="images/mae_masked_input.png" alt="Image with patches masked" style="width:100%;border-radius:6px;border:1px solid var(--border)">
+                <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Masked input</figcaption>
+              </figure>
+            </div>
+            <figure style="margin:0;text-align:center;width:calc(50% - 0.375rem)">
               <img src="images/mae_reconstruction.png" alt="MAE reconstruction output" style="width:100%;border-radius:6px;border:1px solid var(--border)">
               <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Reconstruction</figcaption>
             </figure>
@@ -128,7 +130,7 @@
         <table class="data-table">
           <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
           <tbody>
-            <tr><td>Training data</td><td>~69,000 unlabelled street images from Montreal, Chicago, and Seattle (via Project Sidewalk)</td></tr>
+            <tr><td>Training data</td><td>~69,000 unlabelled street images from Montreal, Chicago, and Seattle (via Project Sidewalk and Mapillary)</td></tr>
             <tr><td>Target epochs</td><td>200</td></tr>
             <tr><td>Completed epochs</td><td>95 (halted due to time constraints)</td></tr>
             <tr><td>Steps per epoch</td><td>975</td></tr>
@@ -161,10 +163,8 @@
         </table>
       </div>
 
-      <div class="img-placeholder mt-3">
-        <span class="ph-icon">📈</span>
-        <p class="ph-title">MAE Training Loss Curve Graph</p>
-        <p class="ph-hint">Replace with: images/mae-loss-curve.png</p>
+      <div class="mt-3">
+        <img src="images/mae_loss_curve_v3.png" alt="MAE training loss curve" style="width:100%;border-radius:6px;border:1px solid var(--border)">
       </div>
     </div>
   </section>
@@ -307,10 +307,8 @@
         </table>
       </div>
 
-      <div class="img-placeholder mt-3">
-        <span class="ph-icon">📊</span>
-        <p class="ph-title">ViT Training Curves — F1 and Accuracy by Epoch</p>
-        <p class="ph-hint">Replace with: images/vit-training-curves.png</p>
+      <div class="mt-3">
+        <img src="images/vit_pass1_curves.png" alt="ViT Pass 1 training curves — F1 and accuracy by epoch" style="width:100%;border-radius:6px;border:1px solid var(--border)">
       </div>
     </div>
   </section>
