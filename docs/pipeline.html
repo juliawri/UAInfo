@@ -98,10 +98,10 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Masked Autoencoder (MAE) Pre-Training</h2>
-      <p class="lead">Before fine-tuning for accessibility classification, the model was pre-trained on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (sourced via Project Sidewalk and Mapillary) using self-supervised Masked Autoencoder methodology, giving it a head start on the visual features that matter for sidewalk accessibility assessment.</p>
 
       <div class="two-col">
         <div>
+          <p class="lead">Before fine-tuning for accessibility classification, the model was pre-trained on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (sourced via Project Sidewalk and Mapillary) using self-supervised Masked Autoencoder methodology, giving it a head start on the visual features that matter for sidewalk accessibility assessment.</p>
           <p>A ViT pre-trained on ImageNet learns general visual features but has no specific knowledge of street-level images, sidewalk surfaces, kerbs, ramps, or urban geometry. MAE pre-training on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle addresses this by teaching the model to reconstruct masked patches, a self-supervised task that forces learning of domain-relevant structure without any labels.</p>
           <p>The MAE encoder (~85M parameters of a Vision Transformer-Base architecture) was then used as the backbone initialisation for all subsequent supervised fine-tuning passes and replaced the standard ImageNet starting point.</p>
         </div>
