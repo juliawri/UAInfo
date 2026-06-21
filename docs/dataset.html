@@ -54,8 +54,95 @@
     </div>
   </section>
 
-  <!-- ── IMAGE COLLECTION ── -->
+  <!-- ── GROUND-TRUTH SURVEY ── -->
   <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <h2 class="section-title">Ground-Truth Survey Campaign</h2>
+      <p class="lead">To build credible accessibility labels, the team conducted a structured survey campaign — presenting real Montreal street images to community members and disability advocates for manual rating.</p>
+
+      <div class="two-col">
+        <div>
+          <p>Participants were shown street-level photographs of Montreal sidewalks and asked to rate each image on a scale of 0 to 4 — from <em>Not Accessible</em> to <em>Fully Accessible</em> — for their specific mobility aid. Survey distribution was supported by Promo-Accès and extended through Rashid Mushkani's network to reach a diverse cross-section of the Montreal disability community.</p>
+          <p class="mt-2">Survey responses could not serve as direct training labels at this scale — 154 ratings across 76 images is too small to train a Vision Transformer from scratch. But they served two critical functions:</p>
+          <ul class="styled-list mt-2 mb-2">
+            <li><strong>Calibration:</strong> The survey statistics (mean and standard deviation per mobility aid type) were used to recalibrate AI-generated labels from Gemini 2.5 Flash to match human perception. See <a href="pipeline.html">ML Pipeline</a> for the full methodology.</li>
+            <li><strong>Validation:</strong> The survey provided partial external validation of the VLM scoring approach — evidence that human raters and AI raters are measuring something comparable, even if not identical.</li>
+          </ul>
+          <p>All survey data was fully anonymised. Participants rated street images only — no personally identifiable information was collected.</p>
+        </div>
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">📋</span>
+            <p class="ph-title">Survey Interface Screenshot</p>
+            <p class="ph-hint">Replace with: images/survey-screenshot.jpg</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap mt-4">
+        <table class="data-table">
+          <thead>
+            <tr><th>Dimension</th><th>Details</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Distribution channels</td><td>30+ disability-focused community groups across Montreal, including Promo-Accès</td></tr>
+            <tr><td>Responses collected</td><td>154 rated image–aid pairs across 76 unique street images</td></tr>
+            <tr><td>Aid types covered</td><td>Manual wheelchair, electric wheelchair, walker, walking cane, mobility scooter, mobility impairment without aid</td></tr>
+            <tr><td>Rating scale</td><td>0–4 (0 = completely inaccessible, 4 = fully accessible)</td></tr>
+            <tr><td>Data handling</td><td>Fully anonymised; no personally identifiable information collected; participants rated images only</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subsection mt-4">Who Responded</h3>
+      <p>Respondents represented a wide range of mobility aids and disability profiles, ensuring that the resulting labels reflect the needs of multiple user groups — not just the most common case.</p>
+      <div class="two-col">
+        <figure class="survey-figure">
+          <img src="images/survey-1.png" alt="Donut chart showing mobility aid types used by survey respondents" class="survey-chart">
+          <figcaption>Mobility aids used by respondents: electric wheelchairs and no-aid users made up the majority, with walking cane and manual wheelchair users also represented.</figcaption>
+        </figure>
+        <figure class="survey-figure">
+          <img src="images/survey-2.png" alt="Donut chart showing disability types among respondents" class="survey-chart">
+          <figcaption>Disability profile of respondents: most reported mobility, flexibility, or dexterity impairments; a significant portion also reported pain or neurodivergence.</figcaption>
+        </figure>
+      </div>
+
+      <h3 class="subsection mt-4">What Respondents Told Us</h3>
+      <p>Ratings were distributed across the full 0–4 scale, with most responses clustering at 3 and 4 — reflecting the bias toward relatively walkable routes in our image sample. More importantly, respondents clearly identified <strong>obstacles and unkept sidewalks</strong> as the leading barriers, followed by lack of seating, narrow paths, and curb issues. These findings directly shaped the feature categories our computer vision model was trained to detect.</p>
+      <div class="two-col">
+        <figure class="survey-figure">
+          <img src="images/survey-3.png" alt="Bar chart showing distribution of accessibility ratings from 0 (Not Accessible) to 4 (Fully Accessible)" class="survey-chart">
+          <figcaption>Rating distribution across the 154 image–aid pairs. Responses skewed toward accessible (scores 3–4), reflecting routes drawn from functional urban sidewalks.</figcaption>
+        </figure>
+        <figure class="survey-figure">
+          <img src="images/survey-4.png" alt="Horizontal bar chart of top accessibility barriers, led by Obstacles and Unkept Sidewalk" class="survey-chart">
+          <figcaption>Top barriers identified by respondents. Obstacles and unkept sidewalks dominated — directly informing which visual features the model was trained to detect.</figcaption>
+        </figure>
+      </div>
+
+      <h3 class="subsection mt-4">Survey Statistics by Mobility Aid</h3>
+      <p>These statistics were used to recalibrate AI-generated accessibility scores before binarization.</p>
+      <div class="table-wrap mt-3">
+        <table class="data-table">
+          <thead>
+            <tr><th>Mobility Aid Type</th><th>Survey Responses (n)</th><th>Mean Score</th><th>Std Dev</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Manual wheelchair</td><td>20</td><td>2.200</td><td>1.005</td></tr>
+            <tr><td>Electric wheelchair</td><td>54</td><td>2.704</td><td>1.039</td></tr>
+            <tr><td>Walker</td><td>38</td><td>2.211</td><td>1.069 (raw scores used — no recalibration)</td></tr>
+            <tr><td>Walking cane</td><td>40</td><td>2.400</td><td>1.033</td></tr>
+            <tr><td>Mobility scooter</td><td>n/a</td><td>2.727 (global fallback)</td><td>1.122</td></tr>
+            <tr><td>Mobility impairment, no aid</td><td>40</td><td>3.050</td><td>1.260</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IMAGE COLLECTION ── -->
+  <section class="section">
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Image Collection via Mapillary</h2>
@@ -81,7 +168,7 @@
   </section>
 
   <!-- ── AI LABELLING ── -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">AI Labelling with Gemini 2.5 Flash</h2>
@@ -129,69 +216,6 @@
         </table>
       </div>
       <p class="text-small text-muted mt-2">The walker class is notably imbalanced (30.3% accessible). This reflects that walker raw Gemini scores were not recalibrated, and the 2.611 mean score placed many locations below the 2.5 binary threshold. This imbalance was one factor explored during ViT fine-tuning.</p>
-    </div>
-  </section>
-
-  <!-- ── GROUND-TRUTH SURVEY ── -->
-  <section class="section section-alt">
-    <div class="container">
-      <hr class="section-rule">
-      <h2 class="section-title">Ground-Truth Survey Campaign</h2>
-      <p class="lead">To build credible accessibility labels, the team conducted a structured survey campaign — presenting real Montreal street images to community members and disability advocates for manual rating.</p>
-
-      <div class="two-col">
-        <div>
-          <p>Survey responses could not serve as direct training labels at this scale — 154 ratings across 76 images is too small to train a Vision Transformer from scratch. But they served two critical functions:</p>
-          <ul class="styled-list mt-2 mb-2">
-            <li><strong>Calibration:</strong> The survey statistics (mean and standard deviation per mobility aid type) were used to recalibrate AI-generated labels from Gemini 2.5 Flash to match human perception. See <a href="pipeline.html">ML Pipeline</a> for the full methodology.</li>
-            <li><strong>Validation:</strong> The survey provided partial external validation of the VLM scoring approach — evidence that human raters and AI raters are measuring something comparable, even if not identical.</li>
-          </ul>
-          <p>All survey data was fully anonymised. Participants rated street images only — no personally identifiable information was collected.</p>
-        </div>
-        <div>
-          <div class="img-placeholder">
-            <span class="ph-icon">📋</span>
-            <p class="ph-title">Survey Interface Screenshot</p>
-            <p class="ph-hint">Replace with: images/survey-screenshot.jpg</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="table-wrap mt-4">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Dimension</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Distribution channels</td><td>30+ disability-focused community groups across Montreal, including Promo-Accès</td></tr>
-            <tr><td>Responses collected</td><td>154 rated image–aid pairs across 76 unique street images</td></tr>
-            <tr><td>Aid types covered</td><td>Manual wheelchair, electric wheelchair, walker, walking cane, mobility scooter, mobility impairment without aid</td></tr>
-            <tr><td>Rating scale</td><td>0–4 (0 = completely inaccessible, 4 = fully accessible)</td></tr>
-            <tr><td>Data handling</td><td>Fully anonymised; no personally identifiable information collected; participants rated images only</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="subsection">Survey Statistics by Mobility Aid</h3>
-      <p>These statistics were used to recalibrate AI-generated accessibility scores before binarization.</p>
-      <div class="table-wrap mt-3">
-        <table class="data-table">
-          <thead>
-            <tr><th>Mobility Aid Type</th><th>Survey Responses (n)</th><th>Mean Score</th><th>Std Dev</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Manual wheelchair</td><td>20</td><td>2.200</td><td>1.005</td></tr>
-            <tr><td>Electric wheelchair</td><td>54</td><td>2.704</td><td>1.039</td></tr>
-            <tr><td>Walker</td><td>38</td><td>2.211</td><td>1.069 (raw scores used — no recalibration)</td></tr>
-            <tr><td>Walking cane</td><td>40</td><td>2.400</td><td>1.033</td></tr>
-            <tr><td>Mobility scooter</td><td>n/a</td><td>2.727 (global fallback)</td><td>1.122</td></tr>
-            <tr><td>Mobility impairment, no aid</td><td>40</td><td>3.050</td><td>1.260</td></tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </section>
 
