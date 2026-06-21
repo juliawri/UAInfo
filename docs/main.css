@@ -427,8 +427,8 @@ p:last-child { margin-bottom: 0; }
   border-top: 3px solid var(--orange);
 }
 .person-photo {
-  width: 76px;
-  height: 76px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background: var(--sky);
   border: 3px solid var(--teal-mid);
