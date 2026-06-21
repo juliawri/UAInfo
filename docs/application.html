@@ -199,15 +199,6 @@
         </div>
       </div>
 
-      <!-- Panel Q&A: Q3 — woven after feedback section -->
-      <div class="panel-qa mt-4">
-        <p class="qa-label">Panel Q&amp;A</p>
-        <p class="qa-q">How is user feedback incorporated into route recommendations?</p>
-        <div class="qa-a">
-          <p>User feedback is included in the prompt sent to the LLM when generating route recommendations. Feedback is weighted by how closely the previous user's origin and destination match the current query — a similar journey receives more weight in the recommendation. This is a prompt-engineering approach: it allows feedback to influence recommendations without requiring model retraining, and it responds immediately to new data.</p>
-          <p class="mt-2">In the future, we plan to implement Reinforcement Learning to incorporate feedback more systematically and at greater scale. RL would allow the route scoring and recommendation system to learn directly from user satisfaction signals, improving continuously as more feedback accumulates — rather than simply surfacing it as context in a prompt.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -228,15 +219,7 @@
         <li>No movement data (journey records) is retained beyond what is necessary for the proximity-weighted feedback calculation</li>
         <li>Feedback data is never sold to or shared with third parties</li>
       </ul>
-
-      <!-- Panel Q&A: Q4 — woven after privacy section -->
-      <div class="panel-qa mt-4">
-        <p class="qa-label">Panel Q&amp;A</p>
-        <p class="qa-q">How does the system handle user privacy?</p>
-        <div class="qa-a">
-          <p>Privacy is a first-class design constraint — built into the architecture from the start, not added as compliance. Concretely: (1) All survey data used for label calibration is fully anonymised — participants rated street images only. (2) User accounts and feedback are stored in Supabase with enterprise-grade security including row-level access controls, so no user can access another's data. (3) Users can delete their account and all associated data at any time from within the application — there is no support request required. (4) No movement data is retained beyond what is needed for the proximity-weighted feedback calculation. The goal is that users can engage with the system knowing their data is not being used in ways they did not consent to.</p>
-        </div>
-      </div>
+      <p class="mt-3">The goal is that users can engage with the system knowing their data is not being used in ways they did not consent to.</p>
     </div>
   </section>
 

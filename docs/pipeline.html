@@ -434,16 +434,10 @@
         </table>
       </div>
 
-      <!-- Panel Q&A: Q2 — woven after VLM results -->
-      <div class="panel-qa mt-4">
-        <p class="qa-label">Panel Q&amp;A</p>
-        <p class="qa-q">How was the VLM validated against human judgement, and what do the results mean?</p>
-        <div class="qa-a">
-          <p>None of the three VLMs showed statistically significant correlation with human survey scores at &alpha;=0.05. But the key point is why: with n=18 locations, the study is fundamentally underpowered. Detecting a moderate correlation (Spearman &rho;&approx;0.3) requires approximately n=55 for 80% statistical power. Non-significance does not mean zero correlation — it means we had insufficient data to confirm or deny one.</p>
-          <p class="mt-2">Qwen2-VL-2B showed the strongest positive correlation (&rho;=0.331), suggesting it may have the best alignment with human perception among those tested. Gemini 2.5 Flash showed moderate positive correlation (&rho;=0.190) — consistent with partial validity of the labels it generated. Gemma 3 4B showed near-zero correlation, suggesting poor alignment.</p>
-          <p class="mt-2">More importantly, we used this finding to motivate our label recalibration methodology: rather than trusting raw Gemini scores, we z-score normalised them to match the human survey distribution before binarizing. This ensures our binary labels reflect human-calibrated thresholds, not raw model outputs — a principled, active response to the uncertainty in VLM–human alignment.</p>
-        </div>
-      </div>
+      <h3 class="subsection">Interpreting the Results</h3>
+      <p>None of the three VLMs showed statistically significant correlation with human survey scores at &alpha;=0.05 — but the key point is why: with n=18 locations, the study is fundamentally underpowered. Detecting a moderate correlation (Spearman &rho;&approx;0.3) requires approximately n=55 for 80% statistical power. Non-significance does not mean zero correlation — it means we had insufficient data to confirm or deny one.</p>
+      <p class="mt-2">Qwen2-VL-2B showed the strongest positive correlation (&rho;=0.331), suggesting it may have the best alignment with human perception among those tested. Gemini 2.5 Flash showed moderate positive correlation (&rho;=0.190), consistent with partial validity of the labels it generated. Gemma 3 4B showed near-zero correlation, suggesting poor alignment.</p>
+      <p class="mt-2">We used this finding to motivate our label recalibration methodology: rather than trusting raw Gemini scores, we z-score normalised them to match the human survey distribution before binarizing. This ensures our binary labels reflect human-calibrated thresholds, not raw model outputs — a principled, active response to the uncertainty in VLM–human alignment.</p>
     </div>
   </section>
 
