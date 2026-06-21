@@ -62,7 +62,7 @@
           <div class="step-num">4</div>
           <div class="step-body">
             <h4>MAE Pre-Training</h4>
-            <p>Vision Transformer pre-trained on domain-specific street images using Masked Autoencoder methodology — 95 epochs, final reconstruction loss 0.38.</p>
+            <p>Vision Transformer pre-trained on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (via Project Sidewalk) using Masked Autoencoder methodology — 95 epochs, final reconstruction loss 0.38.</p>
           </div>
         </div>
         <div class="step">
@@ -98,11 +98,11 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Masked Autoencoder (MAE) Pre-Training</h2>
-      <p class="lead">Before fine-tuning for accessibility classification, the model was pre-trained on domain-specific street images using self-supervised Masked Autoencoder methodology — giving it a head start on the visual features that matter for sidewalk accessibility assessment.</p>
+      <p class="lead">Before fine-tuning for accessibility classification, the model was pre-trained on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (sourced via Project Sidewalk) using self-supervised Masked Autoencoder methodology — giving it a head start on the visual features that matter for sidewalk accessibility assessment.</p>
 
       <div class="two-col">
         <div>
-          <p>A ViT pre-trained on ImageNet learns general visual features but has no specific knowledge of street-level images, sidewalk surfaces, kerbs, ramps, or urban geometry. MAE pre-training on our Montreal street images addresses this by teaching the model to reconstruct masked patches — a self-supervised task that forces learning of domain-relevant structure without any labels.</p>
+          <p>A ViT pre-trained on ImageNet learns general visual features but has no specific knowledge of street-level images, sidewalk surfaces, kerbs, ramps, or urban geometry. MAE pre-training on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (sourced via Project Sidewalk) addresses this by teaching the model to reconstruct masked patches — a self-supervised task that forces learning of domain-relevant structure without any labels.</p>
           <p>The MAE encoder (~85M parameters of a ViT-Base architecture) was then used as the backbone initialisation for all subsequent supervised fine-tuning passes — replacing the standard ImageNet starting point.</p>
         </div>
         <div>
@@ -119,7 +119,7 @@
         <table class="data-table">
           <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
           <tbody>
-            <tr><td>Training data</td><td>Street-level images from three data collection repositories</td></tr>
+            <tr><td>Training data</td><td>~69,000 unlabelled street images from Montreal, Chicago, and Seattle (via Project Sidewalk)</td></tr>
             <tr><td>Target epochs</td><td>200</td></tr>
             <tr><td>Completed epochs</td><td>95 (halted due to time constraints)</td></tr>
             <tr><td>Steps per epoch</td><td>975</td></tr>
@@ -165,7 +165,7 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Vision Transformer Fine-Tuning</h2>
-      <p class="lead">Six rounds of supervised fine-tuning on the MAE-pre-trained encoder. Pass 1 was selected for the production application, achieving the best balance of accuracy and per-class performance.</p>
+      <p class="lead">Six rounds of supervised fine-tuning on the MAE-pre-trained encoder, using the ~31,000 labelled Montreal images specifically. Pass 1 was selected for the production application, achieving the best balance of accuracy and per-class performance.</p>
 
       <h3 class="subsection">Fine-Tuning Architecture</h3>
       <p>All six passes used a two-phase training strategy:</p>
