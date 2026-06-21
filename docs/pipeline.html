@@ -48,21 +48,21 @@
           <div class="step-num">2</div>
           <div class="step-body">
             <h4>AI Labelling with Gemini 2.5 Flash</h4>
-            <p>Each image rated by Gemini for six mobility aid types on a 0–4 scale. 31,887 rows generated programmatically — manual labelling at this scale was infeasible.</p>
+            <p>Each image rated by Gemini for six mobility aid types on a 0–4 scale. 31,887 rows generated programmatically as manual labelling at this scale was infeasible.</p>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-body">
             <h4>Label Calibration &amp; Binarization</h4>
-            <p>AI-generated scores recalibrated to match human survey distributions via z-score normalisation, then binarized into accessible/inaccessible labels.</p>
+            <p>AI-generated scores recalibrated to match human survey distributions, then binarized into accessible/inaccessible labels.</p>
           </div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-body">
             <h4>MAE Pre-Training</h4>
-            <p>Vision Transformer pre-trained on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (via Project Sidewalk) using Masked Autoencoder methodology — 95 epochs, final reconstruction loss 0.38.</p>
+            <p>Vision Transformer pre-trained on ~69,000 unlabelled street images from Montreal, Chicago, and Seattle (via Project Sidewalk) using Masked Autoencoder methodology. It was pre-trained for 95 epochs, final reconstruction loss 0.38.</p>
           </div>
         </div>
         <div class="step">
@@ -76,7 +76,7 @@
           <div class="step-num">6</div>
           <div class="step-body">
             <h4>VLM Validation Study</h4>
-            <p>Formal correlation study comparing three vision-language models against human ground truth for 18 Montreal locations.</p>
+            <p>Correlation study comparing three vision-language models against human ground truth for 18 Montreal locations.</p>
           </div>
         </div>
       </div>
@@ -106,10 +106,19 @@
           <p>The MAE encoder (~85M parameters of a ViT-Base architecture) was then used as the backbone initialisation for all subsequent supervised fine-tuning passes — replacing the standard ImageNet starting point.</p>
         </div>
         <div>
-          <div class="img-placeholder">
-            <span class="ph-icon">🧠</span>
-            <p class="ph-title">MAE reconstruction example</p>
-            <p class="ph-hint">Replace with: images/mae-reconstruction.jpg</p>
+          <div style="display:flex;gap:0.75rem;justify-content:center;align-items:flex-start">
+            <figure style="margin:0;text-align:center;flex:1">
+              <img src="images/mae_original.png" alt="Original street image" style="width:100%;border-radius:6px;border:1px solid var(--border)">
+              <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Original</figcaption>
+            </figure>
+            <figure style="margin:0;text-align:center;flex:1">
+              <img src="images/mae_masked_input.png" alt="Image with patches masked" style="width:100%;border-radius:6px;border:1px solid var(--border)">
+              <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Masked input</figcaption>
+            </figure>
+            <figure style="margin:0;text-align:center;flex:1">
+              <img src="images/mae_reconstruction.png" alt="MAE reconstruction output" style="width:100%;border-radius:6px;border:1px solid var(--border)">
+              <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Reconstruction</figcaption>
+            </figure>
           </div>
         </div>
       </div>
