@@ -100,7 +100,7 @@
             <img src="images/Laurence_photo.webp" alt="Laurence Parent">
           </div>
           <h4>Laurence Parent</h4>
-          <p class="person-role">Plateau-Mont-Royal City Councillor</p>
+          <p class="person-role">Plateau-Mont-Royal Borough Councillor</p>
           <p>Laurence provided <strong>ongoing iterative feedback</strong> throughout the project's development — not a one-time consultation. As a public official in one of Montreal's most walkable but challenging neighbourhoods, she verified that our mobility aid categories, scoring granularity, and route explanations accurately reflected what disabled individuals actually need — including nuances like the importance of flagging construction zones and the need for winter-specific guidance.</p>
           <p class="mt-2">Her engagement constituted a form of continuous, community-grounded validation from a policy and lived-experience perspective.</p>
         </div>
@@ -115,6 +115,35 @@
       <hr class="section-rule">
       <h2 class="section-title">Ground-Truth Survey Campaign</h2>
       <p class="lead">The team ran a structured survey across 30+ Montreal disability groups — 154 rated image–aid pairs used to calibrate AI-generated accessibility labels. Full data and methodology on the Dataset page.</p>
+
+      <p>Participants were shown street-level photographs of Montreal sidewalks and asked to rate each image on a scale of 0 to 4 — from <em>Not Accessible</em> to <em>Fully Accessible</em> — for their specific mobility aid. They were also asked to identify the barriers they found most challenging in daily urban navigation. Survey distribution was supported by Promo-Accès and extended through Rashid Mushkani's network to reach a diverse cross-section of the Montreal disability community.</p>
+
+      <h3 class="subsection mt-4">Who Responded</h3>
+      <p>Respondents represented a wide range of mobility aids and disability profiles, ensuring that the resulting labels reflect the needs of multiple user groups — not just the most common case.</p>
+      <div class="two-col">
+        <figure class="survey-figure">
+          <img src="images/survey-1.png" alt="Donut chart showing mobility aid types used by survey respondents" class="survey-chart">
+          <figcaption>Mobility aids used by respondents: electric wheelchairs and no-aid users made up the majority, with walking cane and manual wheelchair users also represented.</figcaption>
+        </figure>
+        <figure class="survey-figure">
+          <img src="images/survey-2.png" alt="Donut chart showing disability types among respondents" class="survey-chart">
+          <figcaption>Disability profile of respondents: most reported mobility, flexibility, or dexterity impairments; a significant portion also reported pain or neurodivergence.</figcaption>
+        </figure>
+      </div>
+
+      <h3 class="subsection mt-4">What Respondents Told Us</h3>
+      <p>Ratings were distributed across the full 0–4 scale, with most responses clustering at 3 and 4 — reflecting the bias toward relatively walkable routes in our image sample. More importantly, respondents clearly identified <strong>obstacles and unkept sidewalks</strong> as the leading barriers, followed by lack of seating, narrow paths, and curb issues. These findings directly shaped the feature categories our computer vision model was trained to detect.</p>
+      <div class="two-col">
+        <figure class="survey-figure">
+          <img src="images/survey-3.png" alt="Bar chart showing distribution of accessibility ratings from 0 (Not Accessible) to 4 (Fully Accessible)" class="survey-chart">
+          <figcaption>Rating distribution across the 154 image–aid pairs. Responses skewed toward accessible (scores 3–4), reflecting routes drawn from functional urban sidewalks.</figcaption>
+        </figure>
+        <figure class="survey-figure">
+          <img src="images/survey-4.png" alt="Horizontal bar chart of top accessibility barriers, led by Obstacles and Unkept Sidewalk" class="survey-chart">
+          <figcaption>Top barriers identified by respondents. Obstacles and unkept sidewalks dominated — directly informing which visual features the model was trained to detect.</figcaption>
+        </figure>
+      </div>
+
       <p class="mt-3"><a href="dataset.html" class="btn btn-orange" style="display:inline-block">Full Dataset Story &rarr;</a></p>
     </div>
   </section>

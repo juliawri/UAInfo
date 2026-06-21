@@ -282,6 +282,22 @@ p:last-child { margin-bottom: 0; }
   display: block;
   border: 1px solid var(--border);
 }
+.survey-figure {
+  margin: 0;
+}
+.survey-chart {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  display: block;
+}
+.survey-figure figcaption {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+  font-style: italic;
+}
 
 /* ── LAYOUT GRIDS ── */
 .two-col   { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
@@ -427,8 +443,8 @@ p:last-child { margin-bottom: 0; }
   border-top: 3px solid var(--orange);
 }
 .person-photo {
-  width: 140px;
-  height: 140px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
   background: var(--sky);
   border: 3px solid var(--teal-mid);
