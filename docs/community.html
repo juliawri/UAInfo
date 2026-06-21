@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Problem &amp; Community — Urban Access</title>
   <link rel="stylesheet" href="main.css">
-  <link rel="stylesheet" href="leaflet.css">
 </head>
 <body>
 
@@ -40,23 +39,6 @@
       <p>Standard mapping tools — Google Maps, Apple Maps — route pedestrians based on distance and travel time. They have no concept of <em>ground-level conditions</em>: whether a sidewalk is cracked, whether a ramp is actually navigable, whether a construction zone has closed the only accessible path through a block.</p>
       <p>The result is a navigation experience that fails people with mobility impairments in ways the tools cannot even measure or report on. Users must rely on memory, word-of-mouth, or trial and error.</p>
       <p>Urban Access addresses this gap directly: by integrating computer vision and street-level imagery into the routing layer, it gives users a route recommendation that reflects the actual, present-day state of Montreal's sidewalks — not an idealised map.</p>
-
-      <div class="map-panel mt-3">
-        <div class="map-panel-header">
-          <span class="map-panel-title">Montreal — Sidewalk Accessibility</span>
-          <span class="map-panel-sub">14,000+ locations · click any point for details</span>
-        </div>
-        <div id="mtl-map"></div>
-        <div class="map-legend">
-          <div class="legend-gradient-bar"></div>
-          <div class="legend-labels">
-            <span>0 — Inaccessible</span>
-            <span>2 — Moderate</span>
-            <span>4 — Accessible</span>
-          </div>
-          <p class="legend-caption">Avg. score across 6 mobility aid types &amp; 3 camera views. Click any point for details.</p>
-        </div>
-      </div>
 
       <h3 class="subsection">What Standard Maps Miss</h3>
       <div class="cards">
@@ -182,100 +164,10 @@
   <div class="footer-copyright">AI4Good Lab &middot; Montreal &middot; June 2026</div>
 </footer>
 
-<script src="leaflet.js"></script>
-<script src="map-data.js"></script>
 <script>
   document.getElementById('hamburger').addEventListener('click', function() {
     document.getElementById('navLinks').classList.toggle('open');
   });
-
-  (function () {
-    var STOPS = [
-      [0, [215, 48,  39 ]],
-      [1, [252, 141, 89 ]],
-      [2, [254, 224, 139]],
-      [3, [145, 207, 96 ]],
-      [4, [26,  152, 80 ]]
-    ];
-
-    function scoreColor(s) {
-      s = Math.max(0, Math.min(4, s));
-      for (var i = 1; i < STOPS.length; i++) {
-        if (s <= STOPS[i][0]) {
-          var t = (s - STOPS[i-1][0]) / (STOPS[i][0] - STOPS[i-1][0]);
-          var r = Math.round(STOPS[i-1][1][0] + t * (STOPS[i][1][0] - STOPS[i-1][1][0]));
-          var g = Math.round(STOPS[i-1][1][1] + t * (STOPS[i][1][1] - STOPS[i-1][1][1]));
-          var b = Math.round(STOPS[i-1][1][2] + t * (STOPS[i][1][2] - STOPS[i-1][1][2]));
-          return 'rgb(' + r + ',' + g + ',' + b + ')';
-        }
-      }
-      return 'rgb(26,152,80)';
-    }
-
-    var AIDS = [
-      'Manual Wheelchair', 'Electric Wheelchair', 'Walker',
-      'Walking Cane', 'Mobility Scooter', 'Vision Impaired'
-    ];
-
-    function scoreBar(v, col) {
-      var pct = (v / 4 * 100).toFixed(0);
-      return '<div style="display:flex;align-items:center;gap:5px;margin:2px 0">' +
-        '<div style="flex:1;height:5px;border-radius:3px;background:#e0e0e0">' +
-          '<div style="width:' + pct + '%;height:100%;border-radius:3px;background:' + col + '"></div>' +
-        '</div>' +
-        '<span style="width:22px;text-align:right;font-size:0.77rem;font-weight:700;color:' + col + '">' + v.toFixed(1) + '</span>' +
-      '</div>';
-    }
-
-    var map = L.map('mtl-map', {
-      center: [45.53, -73.62],
-      zoom: 12,
-      renderer: L.canvas({ padding: 0.5 })
-    });
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
-    }).addTo(map);
-
-    MAP_DATA.forEach(function(pt) {
-      var col = scoreColor(pt.avg);
-      L.circleMarker([pt.lat, pt.lon], {
-        radius: 5,
-        fillColor: col,
-        color: 'rgba(0,0,0,0.2)',
-        weight: 0.5,
-        fillOpacity: 0.85
-      })
-      .bindPopup(function() {
-        var rows = pt.aids.map(function(v, i) {
-          if (v === null) return '';
-          var c = scoreColor(v);
-          return '<tr>' +
-            '<td style="font-size:0.78rem;padding:2px 6px 2px 0;white-space:nowrap;color:#4a6666">' + AIDS[i] + '</td>' +
-            '<td style="min-width:100px">' + scoreBar(v, c) + '</td>' +
-          '</tr>';
-        }).join('');
-
-        var justHtml = pt.j
-          ? '<p style="font-size:0.77rem;color:#4a6666;margin:8px 0 0;line-height:1.45;border-top:1px solid #e8e8e8;padding-top:7px">' + pt.j + '</p>'
-          : '';
-        return '<div style="min-width:230px;font-family:\'Segoe UI\',system-ui,sans-serif">' +
-          '<div style="font-weight:800;font-size:1rem;color:#1e3d3d;margin-bottom:2px">' +
-            'Score: <span style="color:' + col + '">' + pt.avg.toFixed(2) + '</span>' +
-            '<span style="font-weight:400;font-size:0.8rem;color:#888"> / 4</span>' +
-          '</div>' +
-          '<div style="font-size:0.75rem;color:#888;margin-bottom:8px">' +
-            (pt.sw ? '✓ Sidewalk present' : '✗ No sidewalk') +
-          '</div>' +
-          '<table style="width:100%;border-collapse:collapse">' + rows + '</table>' +
-          justHtml +
-        '</div>';
-      }, { maxWidth: 300, className: 'map-popup' })
-      .addTo(map);
-    });
-  })();
 </script>
 </body>
 </html>

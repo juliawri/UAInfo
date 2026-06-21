@@ -601,7 +601,7 @@ footer nav a:hover { color: white; }
 .legend-gradient-bar {
   height: 8px;
   border-radius: 4px;
-  background: linear-gradient(to right, #d73027, #fc8d59, #fee08b, #91cf60, #1a9850);
+  background: linear-gradient(to right, #1e3d3d, #2d5a5a, #3d7070, #9dcde8, #cce8f4);
   margin-bottom: 4px;
 }
 .legend-labels {
