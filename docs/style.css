@@ -47,16 +47,17 @@ nav .brand {
   color: white;
   text-decoration: none;
   letter-spacing: -0.02em;
-  margin-right: auto;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 nav .brand span { color: var(--sky); }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.5rem;
   list-style: none;
+  padding-left: 2rem;
 }
 
 .nav-links a {
@@ -248,62 +249,7 @@ p:last-child { margin-bottom: 0; }
 .card h3    { color: var(--teal-dark); font-size: 1.05rem; margin-bottom: 0.6rem; }
 .card p     { font-size: 0.9rem; color: var(--text-muted); }
 
-/* ── PANEL Q&A ── */
-.panel-qa {
-  background: var(--sky);
-  border-left: 4px solid var(--teal-mid);
-  border-radius: 0 10px 10px 0;
-  padding: 1.5rem 1.75rem;
-  margin: 2.5rem 0;
-}
 
-.panel-qa .qa-label {
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--teal-mid);
-  margin-bottom: 0.65rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.panel-qa .qa-label::before {
-  content: "?";
-  background: var(--teal-mid);
-  color: white;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-.qa-q { font-weight: 700; color: var(--teal-dark); font-size: 1rem; margin-bottom: 0.75rem; }
-.qa-a { font-size: 0.92rem; color: var(--text); line-height: 1.65; }
-
-/* ── EVAL BADGES ── */
-.eval-badges { margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.22rem 0.7rem;
-  border-radius: 50px;
-  font-size: 0.68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-}
-.badge-innovation  { background: var(--orange);    color: white; }
-.badge-impact      { background: var(--teal-mid);  color: white; }
-.badge-ethics      { background: var(--teal-light); color: white; }
-.badge-feasibility { background: #5a8080;           color: white; }
-.badge-pitch       { background: var(--teal-dark);  color: white; }
 
 /* ── IMAGE PLACEHOLDERS ── */
 .img-placeholder {

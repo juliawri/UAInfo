@@ -31,10 +31,6 @@
   <section class="section">
     <div class="container">
       <hr class="section-rule">
-      <div class="eval-badges">
-        <span class="badge badge-impact">&#9733; Impact</span>
-        <span class="badge badge-feasibility">&#10003; Feasibility</span>
-      </div>
       <h2 class="section-title">Who This Is For</h2>
       <p class="lead">Accessible routing isn't a niche problem. It affects hundreds of thousands of Montrealers today, and millions of Canadians who currently have no tool that accounts for their real experience of urban navigation.</p>
 
@@ -70,9 +66,6 @@
   <section class="section section-alt">
     <div class="container">
       <hr class="section-rule">
-      <div class="eval-badges">
-        <span class="badge badge-innovation">&#9733; Innovation</span>
-      </div>
       <h2 class="section-title">What Makes This Novel</h2>
       <p class="lead">Urban Access advances the state of the art across several dimensions — not just as an application, but as a set of methodological contributions to AI-assisted accessibility assessment.</p>
 
@@ -109,9 +102,6 @@
   <section class="section">
     <div class="container">
       <hr class="section-rule">
-      <div class="eval-badges">
-        <span class="badge badge-ethics">&#10003; Ethics</span>
-      </div>
       <h2 class="section-title">Ethics By Design</h2>
       <p class="lead">Ethical considerations were embedded at every stage of the project — not treated as a compliance checklist at the end.</p>
 
@@ -144,10 +134,6 @@
   <section class="section section-alt">
     <div class="container">
       <hr class="section-rule">
-      <div class="eval-badges">
-        <span class="badge badge-feasibility">&#10003; Feasibility</span>
-        <span class="badge badge-impact">&#9733; Impact</span>
-      </div>
       <h2 class="section-title">Built to Scale</h2>
       <p class="lead">The pipeline is city-agnostic. Every component can be replicated for any city with Mapillary coverage — which is most major urban centres globally.</p>
 
@@ -171,15 +157,7 @@
         </div>
       </div>
 
-      <!-- Panel Q&A: Q5 — woven after scalability section -->
-      <div class="panel-qa mt-4">
-        <p class="qa-label">Panel Q&amp;A</p>
-        <p class="qa-q">Is this scalable beyond Montreal?</p>
-        <div class="qa-a">
-          <p>Yes — with the right resources. The pipeline is city-agnostic: Mapillary has global coverage, and the image collection, labelling, and training pipeline can be replicated for any city. Mapillary provides excellent coverage in the downtown cores of most major Canadian cities, which is where the greatest density of mobility-impaired users tends to be concentrated.</p>
-          <p class="mt-2">Scaling to the full Canadian scope would realistically require: (1) funding to access Google Street View for broader and higher-resolution image coverage in lower-density areas where Mapillary is sparse; (2) stable hosting beyond Google Cloud's 3-month free tier; and (3) access to city-specific auxiliary data such as snow removal schedules — Montreal's snow removal API was under maintenance during our development period. These are resource constraints, not technical blockers. The methodology itself transfers.</p>
-        </div>
-      </div>
+      <p class="mt-4">Scaling to the full Canadian scope would realistically require: (1) funding to access Google Street View for broader and higher-resolution image coverage in lower-density areas where Mapillary is sparse; (2) stable hosting beyond Google Cloud's 3-month free tier; and (3) access to city-specific auxiliary data such as snow removal schedules — Montreal's snow removal API was under maintenance during our development period. These are resource constraints, not technical blockers. The methodology itself transfers.</p>
     </div>
   </section>
 
@@ -234,10 +212,6 @@
   <section class="section section-alt">
     <div class="container">
       <hr class="section-rule">
-      <div class="eval-badges">
-        <span class="badge badge-impact">&#9733; Impact</span>
-        <span class="badge badge-feasibility">&#10003; Feasibility</span>
-      </div>
       <h2 class="section-title">Development Roadmap</h2>
       <p class="lead">A clear, prioritised path from current deployed state to city-scale accessible routing infrastructure.</p>
 
@@ -245,36 +219,22 @@
         <div class="roadmap-item">
           <p class="phase-label">Phase 1 — Stability</p>
           <h4>Secure Hosting &amp; Complete Pre-Training</h4>
-          <p>Secure stable hosting beyond the 3-month Google Cloud trial through grant funding or institutional partnership. Run remaining MAE epochs (95 → 200) to improve encoder quality. Deploy a stable production server.</p>
+          <p>Secure stable hosting beyond the 3-month Google Cloud trial through grant funding or institutional partnership — without it, the application cannot build the user base required for meaningful feedback accumulation. Run remaining MAE epochs (95 → 200) to improve encoder quality; the loss trajectory suggests continued improvement is available. Deploy a stable production server.</p>
         </div>
         <div class="roadmap-item">
           <p class="phase-label">Phase 2 — Data Quality</p>
           <h4>Expand Coverage &amp; Winter Data</h4>
-          <p>Integrate Google Street View for broader image coverage in suburban areas. Collect winter imagery for Montreal to address the seasonal data gap. Acquire the snow removal schedule API for real-time winter routing. Expand human survey to increase ground-truth validation sample size.</p>
+          <p>Integrate Google Street View for broader image coverage in suburban areas where Mapillary is sparse, which currently limits routing reliability outside Montreal's downtown core. Collect winter imagery for Montreal to address the seasonal data gap, and acquire the snow removal schedule API for real-time winter routing — this is when accessible routing is most critically needed in the city. Expand human survey to increase ground-truth validation sample size.</p>
         </div>
         <div class="roadmap-item">
           <p class="phase-label">Phase 3 — Intelligence</p>
           <h4>Reinforcement Learning &amp; Transit Integration</h4>
-          <p>Implement RL feedback loop to replace prompt-weighting with a proper learning mechanism. Add GTFS transit integration so users can plan multi-modal accessible journeys (walk + metro + bus). Explore extension to visual impairment and hearing impairment categories, which were scored during VLM labelling.</p>
+          <p>Implement RL feedback loop to replace prompt-weighting with a proper learning mechanism that allows the routing system to improve from user satisfaction signals at scale. Add GTFS transit integration so users can plan multi-modal accessible journeys — walk + metro + bus — with accessibility scores across the full trip, not just the walking segments. Explore extension to visual impairment and hearing impairment categories, which were scored during VLM labelling.</p>
         </div>
         <div class="roadmap-item">
           <p class="phase-label">Phase 4 — Scale</p>
           <h4>Canada-Wide Deployment</h4>
           <p>Replicate the pipeline for additional Canadian cities. Establish data-sharing partnerships with municipalities to access construction and infrastructure data. Reach the 4M+ Canadians with mobility impairments who lack a routing tool that reflects their real experience.</p>
-        </div>
-      </div>
-
-      <!-- Panel Q&A: Q6 — woven after roadmap -->
-      <div class="panel-qa mt-4">
-        <p class="qa-label">Panel Q&amp;A</p>
-        <p class="qa-q">What would you do with more time and resources?</p>
-        <div class="qa-a">
-          <p><strong>Google Street View access.</strong> Mapillary is excellent but Google Street View offers broader coverage in lower-density areas, which currently limits our routing reliability outside Montreal's downtown core. Licensing costs are the primary barrier.</p>
-          <p class="mt-2"><strong>Stable production hosting.</strong> The Google Cloud free tier expires after 3 months. A grant or institutional partnership is needed for sustained deployment. Without stable hosting, the application cannot build the user base required for meaningful feedback accumulation.</p>
-          <p class="mt-2"><strong>Snow removal data.</strong> Montreal's snow removal API was under maintenance during our development period. Integrating it would dramatically improve winter routing accuracy — which is when accessible routing is most critically needed in this city.</p>
-          <p class="mt-2"><strong>Complete MAE training.</strong> 95 of 200 planned epochs were run. The loss trajectory suggests continued improvement. Full training would likely improve ViT F1 across all classes.</p>
-          <p class="mt-2"><strong>Reinforcement Learning for feedback.</strong> Replace the current prompt-weighting approach with a proper RL feedback loop that allows the routing system to improve from user satisfaction signals at scale.</p>
-          <p class="mt-2"><strong>Real-time transit integration.</strong> Incorporate GTFS transit data so users can plan multi-modal accessible journeys — walk + metro + bus — with accessibility scores across the full trip, not just the walking segments.</p>
         </div>
       </div>
     </div>

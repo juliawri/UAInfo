@@ -85,10 +85,6 @@
   <section class="section section-alt">
     <div class="container">
       <hr class="section-rule">
-      <div class="eval-badges">
-        <span class="badge badge-innovation">&#9733; Innovation</span>
-        <span class="badge badge-feasibility">&#10003; Feasibility</span>
-      </div>
       <h2 class="section-title">Dataset Creation</h2>
       <p class="lead">No publicly available dataset combined street-level imagery with per-mobility-aid accessibility labels at scale for Canadian cities. We built one.</p>
 
@@ -133,7 +129,6 @@
       </div>
 
       <h3 class="subsection">Label Calibration — A Novel Methodological Contribution</h3>
-      <div class="eval-badges mt-2"><span class="badge badge-innovation">&#9733; Innovation</span></div>
       <p>Raw Gemini scores have a different statistical distribution than human survey ratings — a systematic bias arising from the model's different interpretation of the 0–4 scale. Left uncorrected, training labels would be systematically offset from human judgement.</p>
       <p>The recalibration procedure uses z-score normalisation to map Gemini scores into the same mean and standard deviation as the human survey responses for each mobility aid type, then applies a binary threshold:</p>
 
@@ -166,10 +161,6 @@
   <section class="section">
     <div class="container">
       <hr class="section-rule">
-      <div class="eval-badges">
-        <span class="badge badge-innovation">&#9733; Innovation</span>
-        <span class="badge badge-feasibility">&#10003; Feasibility</span>
-      </div>
       <h2 class="section-title">Masked Autoencoder (MAE) Pre-Training</h2>
       <p class="lead">Before fine-tuning for accessibility classification, the model was pre-trained on domain-specific street images using self-supervised Masked Autoencoder methodology — giving it a head start on the visual features that matter for sidewalk accessibility assessment.</p>
 
@@ -237,10 +228,6 @@
   <section class="section section-alt">
     <div class="container">
       <hr class="section-rule">
-      <div class="eval-badges">
-        <span class="badge badge-innovation">&#9733; Innovation</span>
-        <span class="badge badge-feasibility">&#10003; Feasibility</span>
-      </div>
       <h2 class="section-title">Vision Transformer Fine-Tuning</h2>
       <p class="lead">Six rounds of supervised fine-tuning on the MAE-pre-trained encoder. Pass 1 was selected for the production application, achieving the best balance of accuracy and per-class performance.</p>
 
@@ -387,10 +374,6 @@
   <section class="section">
     <div class="container">
       <hr class="section-rule">
-      <div class="eval-badges">
-        <span class="badge badge-innovation">&#9733; Innovation</span>
-        <span class="badge badge-ethics">&#10003; Ethics</span>
-      </div>
       <h2 class="section-title">VLM Validation Study</h2>
       <p class="lead">How well do Vision-Language Models agree with human accessibility judgements? We ran a formal correlation study to find out — and used the findings to inform our label quality controls.</p>
 
