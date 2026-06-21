@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Application — Urban Access</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="brand">Urban<span>Access</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="community.html">Problem &amp; Community</a></li>
+    <li><a href="pipeline.html">ML Pipeline</a></li>
+    <li><a href="application.html" class="active">The App</a></li>
+    <li><a href="impact.html">Impact &amp; Vision</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<main>
+
+  <div class="page-hero">
+    <h1>The Application</h1>
+    <p>From user input to route recommendation — how the ML pipeline is integrated into a full-stack accessible routing tool.</p>
+  </div>
+
+  <!-- ── APP SCREENSHOTS ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-feasibility">&#10003; Feasibility</span>
+        <span class="badge badge-pitch">&#9733; Pitch</span>
+      </div>
+      <h2 class="section-title">A Working End-to-End System</h2>
+      <p class="lead">Urban Access was demonstrated live at Demo Day 2026 — a complete application taking user inputs and returning accessible route recommendations with plain-language explanations.</p>
+
+      <div class="img-grid">
+        <div class="img-placeholder">
+          <span class="ph-icon">🗺️</span>
+          <p class="ph-title">Route selection screen</p>
+          <p class="ph-hint">images/app-route-screen.jpg</p>
+        </div>
+        <div class="img-placeholder">
+          <span class="ph-icon">♿</span>
+          <p class="ph-title">Mobility aid selection</p>
+          <p class="ph-hint">images/app-aid-selection.jpg</p>
+        </div>
+        <div class="img-placeholder">
+          <span class="ph-icon">📋</span>
+          <p class="ph-title">Route recommendation with explanation</p>
+          <p class="ph-hint">images/app-recommendation.jpg</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <h2 class="section-title">How It Works</h2>
+      <p class="lead">Seven steps from user input to a ranked route recommendation — combining vision AI, VLM annotation, open data, and an LLM that synthesises everything into plain language.</p>
+
+      <div class="steps mt-3">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>User Input</h4>
+            <p>The user specifies their mobility aid type, their origin, and their destination. Urban Access supports six aid types: manual wheelchair, electric wheelchair, walker, walking cane, mobility scooter, and mobility impairment without aid.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Candidate Route Generation</h4>
+            <p>Multiple candidate pedestrian routes between origin and destination are generated using OpenStreetMap/OSRM-based routing. This creates the pool of options to evaluate and rank by accessibility.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Street-Level Image Retrieval</h4>
+            <p>For each candidate route, hundreds of street-level images are retrieved from Mapillary at regular intervals along the path — using the same coordinate-based API approach developed during dataset creation.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>ViT Accessibility Scoring</h4>
+            <p>The fine-tuned Vision Transformer (Pass 1) runs inference on each retrieved image, producing a binary accessibility prediction for the user's selected mobility aid type. Per-image scores are aggregated to rate each route segment.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>VLM Secondary Scoring</h4>
+            <p>The most inaccessible or uncertain route points are passed to Gemini 2.5 Flash for a richer, contextual assessment. The VLM provides a rating and natural-language justification for why each critical location is or is not accessible — without incurring the cost of running the VLM on every image.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <h4>Auxiliary Data Integration</h4>
+            <p>The LLM prompt incorporates four additional data signals: pedestrian safety data (intersection and crossing hazards), construction data (active zones blocking accessible paths), inclination/gradient data (especially relevant for wheelchairs and scooters), and user feedback from similar past journeys.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">7</div>
+          <div class="step-body">
+            <h4>LLM Route Recommendation</h4>
+            <p>An open-source LLM synthesises all signals and generates a ranked route recommendation: the primary recommended route with a plain-language explanation, two alternatives with comparative reasoning, and specific accessibility warnings for notable barriers along each route.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ARCHITECTURE ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-feasibility">&#10003; Feasibility</span>
+      </div>
+      <h2 class="section-title">Technical Architecture</h2>
+      <p class="lead">Built entirely on open-source components and free API tiers — designed to be deployable without a large infrastructure budget.</p>
+
+      <div class="two-col">
+        <div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Component</th><th>Technology</th></tr></thead>
+              <tbody>
+                <tr><td>Backend</td><td>Python (FastAPI)</td></tr>
+                <tr><td>ML inference</td><td>PyTorch (ViT), Gemini API (VLM)</td></tr>
+                <tr><td>Database</td><td>Supabase (user accounts, feedback)</td></tr>
+                <tr><td>Image source</td><td>Mapillary API</td></tr>
+                <tr><td>Routing engine</td><td>OpenStreetMap / OSRM</td></tr>
+                <tr><td>Hosting</td><td>Google Cloud Platform (free tier, 3-month trial)</td></tr>
+                <tr><td>LLM</td><td>Open-source language model</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="info-box mt-3">
+            <p><strong>Current constraint:</strong> The Google Cloud free tier hosting expires after 3 months. Securing stable hosting — through grant funding, a university partnership, or non-profit cloud credits — is the primary feasibility challenge for sustained deployment. All other components are open-source or available on free tiers.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">🏗️</span>
+            <p class="ph-title">Architecture diagram</p>
+            <p class="ph-hint">Replace with: images/architecture-diagram.png</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEEDBACK SYSTEM ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-innovation">&#9733; Innovation</span>
+        <span class="badge badge-ethics">&#10003; Ethics</span>
+      </div>
+      <h2 class="section-title">User Feedback System</h2>
+      <p class="lead">Urban Access improves with use. After completing a journey, users can rate the route's accessibility — and that feedback is immediately incorporated into future recommendations.</p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">⭐</span>
+          <h3>Feedback Collection</h3>
+          <p>After a journey, users rate the accessibility of the route they used and optionally add qualitative comments. Feedback is stored securely in a Supabase database linked to their account.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">⚖️</span>
+          <h3>Proximity-Weighted Integration</h3>
+          <p>Feedback is incorporated into the LLM prompt that generates route recommendations. Weight is proportional to how closely the previous user's origin and destination match the current query — similar journeys receive more weight.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🤖</span>
+          <h3>Future: Reinforcement Learning</h3>
+          <p>The current approach is a prompt-engineering solution — effective but limited at scale. Reinforcement Learning has been identified as the appropriate long-term mechanism for incorporating feedback directly into model scoring, improving continuously as data accumulates.</p>
+        </div>
+      </div>
+
+      <!-- Panel Q&A: Q3 — woven after feedback section -->
+      <div class="panel-qa mt-4">
+        <p class="qa-label">Panel Q&amp;A</p>
+        <p class="qa-q">How is user feedback incorporated into route recommendations?</p>
+        <div class="qa-a">
+          <p>User feedback is included in the prompt sent to the LLM when generating route recommendations. Feedback is weighted by how closely the previous user's origin and destination match the current query — a similar journey receives more weight in the recommendation. This is a prompt-engineering approach: it allows feedback to influence recommendations without requiring model retraining, and it responds immediately to new data.</p>
+          <p class="mt-2">In the future, we plan to implement Reinforcement Learning to incorporate feedback more systematically and at greater scale. RL would allow the route scoring and recommendation system to learn directly from user satisfaction signals, improving continuously as more feedback accumulates — rather than simply surfacing it as context in a prompt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRIVACY ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-ethics">&#10003; Ethics</span>
+      </div>
+      <h2 class="section-title">Privacy &amp; Data Security</h2>
+      <p class="lead">User privacy is a first-class design constraint, not an afterthought. Urban Access was built so that users have meaningful control over their own data.</p>
+
+      <ul class="check-list mt-3">
+        <li>All survey data used for label calibration is fully anonymised — no personally identifiable information was collected during the survey campaign</li>
+        <li>User accounts and associated feedback data are stored in Supabase with enterprise-grade security and row-level access controls</li>
+        <li>Users can delete their account and all associated feedback data at any time from within the application — no lock-in</li>
+        <li>No movement data (journey records) is retained beyond what is necessary for the proximity-weighted feedback calculation</li>
+        <li>Feedback data is never sold to or shared with third parties</li>
+      </ul>
+
+      <!-- Panel Q&A: Q4 — woven after privacy section -->
+      <div class="panel-qa mt-4">
+        <p class="qa-label">Panel Q&amp;A</p>
+        <p class="qa-q">How does the system handle user privacy?</p>
+        <div class="qa-a">
+          <p>Privacy is a first-class design constraint — built into the architecture from the start, not added as compliance. Concretely: (1) All survey data used for label calibration is fully anonymised — participants rated street images only. (2) User accounts and feedback are stored in Supabase with enterprise-grade security including row-level access controls, so no user can access another's data. (3) Users can delete their account and all associated data at any time from within the application — there is no support request required. (4) No movement data is retained beyond what is needed for the proximity-weighted feedback calculation. The goal is that users can engage with the system knowing their data is not being used in ways they did not consent to.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LIVE DEMO ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <h2 class="section-title">Demo Day Demonstration</h2>
+      <p class="lead">Urban Access was demonstrated live at the AI4Good Lab Demo Day 2026 — a real-time walk-through of the full routing flow from user input to recommendation.</p>
+
+      <div class="two-col">
+        <div>
+          <p>The live demo illustrated:</p>
+          <ul class="styled-list mt-2 mb-3">
+            <li>Selecting a mobility aid type (electric wheelchair)</li>
+            <li>Entering an origin and destination in Montreal</li>
+            <li>Receiving a primary route recommendation with plain-language accessibility explanation</li>
+            <li>Viewing two alternative routes with comparative reasoning</li>
+            <li>Seeing specific accessibility warnings for a flagged construction zone</li>
+          </ul>
+          <p>The pitch narrative moved from the 200,000+ Montrealers statistic, to Rashid Mushkani's last-mile insight, to the live demo, to Canada-wide scale — designed to be graspable for both technical and non-technical audiences in under three minutes.</p>
+        </div>
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">🎬</span>
+            <p class="ph-title">Demo Day live demonstration</p>
+            <p class="ph-hint">Replace with: images/demo-day.jpg</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NEXT PAGE ── -->
+  <section class="section-sm section-dark text-center">
+    <div class="container">
+      <p style="opacity:0.75;margin-bottom:1rem">Next: The broader impact, evaluation criteria, and the path to scale</p>
+      <a href="impact.html" class="btn btn-orange">Impact &amp; Vision &rarr;</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="brand">Urban<span>Access</span></span>
+      <p>AI-powered accessible routing for Montreal.<br>Built at the AI4Good Lab — Demo Day 2026.</p>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="community.html">Problem &amp; Community</a>
+      <a href="pipeline.html">ML Pipeline</a>
+      <a href="application.html">The App</a>
+      <a href="impact.html">Impact &amp; Vision</a>
+    </nav>
+  </div>
+  <div class="footer-copyright">AI4Good Lab &middot; Montreal &middot; June 2026</div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

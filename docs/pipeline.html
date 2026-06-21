@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ML Pipeline — Urban Access</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="brand">Urban<span>Access</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="community.html">Problem &amp; Community</a></li>
+    <li><a href="pipeline.html" class="active">ML Pipeline</a></li>
+    <li><a href="application.html">The App</a></li>
+    <li><a href="impact.html">Impact &amp; Vision</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<main>
+
+  <div class="page-hero">
+    <h1>ML Pipeline</h1>
+    <p>From raw street images to a deployed accessibility classifier — dataset creation, self-supervised pre-training, supervised fine-tuning, and VLM validation.</p>
+  </div>
+
+  <!-- ── PIPELINE OVERVIEW ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <h2 class="section-title">Pipeline at a Glance</h2>
+      <p class="lead">Four stages, built sequentially — each one feeding the next. No existing dataset existed for this task at this scale, so we built everything from scratch.</p>
+
+      <div class="steps mt-3">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Image Collection via Mapillary</h4>
+            <p>~14,000 Montreal locations sampled near transit stations and across the island. Images stored with latitude, longitude, and view angle metadata.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>AI Labelling with Gemini 2.5 Flash</h4>
+            <p>Each image rated by Gemini for six mobility aid types on a 0–4 scale. 31,887 rows generated programmatically — manual labelling at this scale was infeasible.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Label Calibration &amp; Binarization</h4>
+            <p>AI-generated scores recalibrated to match human survey distributions via z-score normalisation, then binarized into accessible/inaccessible labels.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>MAE Pre-Training</h4>
+            <p>Vision Transformer pre-trained on domain-specific street images using Masked Autoencoder methodology — 95 epochs, final reconstruction loss 0.38.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>ViT Fine-Tuning (6 Passes)</h4>
+            <p>Six rounds of supervised fine-tuning on the labelled dataset. Pass 1 selected for deployment: mean F1 0.726, validation accuracy 76.1%.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <h4>VLM Validation Study</h4>
+            <p>Formal correlation study comparing three vision-language models against human ground truth for 18 Montreal locations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DATASET CREATION ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-innovation">&#9733; Innovation</span>
+        <span class="badge badge-feasibility">&#10003; Feasibility</span>
+      </div>
+      <h2 class="section-title">Dataset Creation</h2>
+      <p class="lead">No publicly available dataset combined street-level imagery with per-mobility-aid accessibility labels at scale for Canadian cities. We built one.</p>
+
+      <h3 class="subsection">Image Collection via Mapillary</h3>
+      <div class="two-col">
+        <div>
+          <p>Mapillary is an open-source, crowd-sourced street-level imagery platform — similar to Google Street View but with a public API and no licensing restrictions. Images were retrieved by geographic coordinate, allowing structured collection across Montreal.</p>
+          <ul class="styled-list mt-2 mb-2">
+            <li>Coordinates sampled near Montreal transit stations (bus stops, metro stations) and across Montreal Island</li>
+            <li>~14,000 unique coordinate locations collected</li>
+            <li>Multiple view angles captured per location where available</li>
+            <li>Images stored as <code style="background:var(--bg-off);padding:0.1em 0.3em;border-radius:3px;font-size:0.85em">{latitude}_{longitude}_{view_angle}.jpg</code></li>
+            <li>Three separate data collection repositories contributed images</li>
+          </ul>
+          <p>Images from all three sources were also used in the MAE pre-training phase.</p>
+        </div>
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">🛰️</span>
+            <p class="ph-title">Mapillary coverage map for Montreal</p>
+            <p class="ph-hint">Replace with: images/mapillary-coverage.jpg</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">AI Labelling with Gemini 2.5 Flash</h3>
+      <p>Manual labelling of 14,000+ locations across six mobility aid types would require approximately 500,000 individual human ratings — infeasible at project scale. Instead, Gemini 2.5 Flash was used to generate accessibility scores programmatically.</p>
+      <p>For each image, Gemini was prompted to rate accessibility for each mobility aid type on a 0–4 integer scale, with a structured text justification. Total output: <strong>31,887 labelled rows</strong>.</p>
+
+      <div class="table-wrap mt-3">
+        <table class="data-table">
+          <thead><tr><th>Mobility Aid Type</th><th>Gemini Mean Score</th><th>Gemini Std Dev</th></tr></thead>
+          <tbody>
+            <tr><td>Manual wheelchair</td><td>2.235</td><td>1.236</td></tr>
+            <tr><td>Electric wheelchair</td><td>(calibrated to survey)</td><td>—</td></tr>
+            <tr><td>Walker</td><td>2.611</td><td>1.448</td></tr>
+            <tr><td>Walking cane</td><td>(calibrated to survey)</td><td>—</td></tr>
+            <tr><td>Mobility scooter</td><td>(global fallback used)</td><td>—</td></tr>
+            <tr><td>Mobility impairment, no aid</td><td>(calibrated to survey)</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subsection">Label Calibration — A Novel Methodological Contribution</h3>
+      <div class="eval-badges mt-2"><span class="badge badge-innovation">&#9733; Innovation</span></div>
+      <p>Raw Gemini scores have a different statistical distribution than human survey ratings — a systematic bias arising from the model's different interpretation of the 0–4 scale. Left uncorrected, training labels would be systematically offset from human judgement.</p>
+      <p>The recalibration procedure uses z-score normalisation to map Gemini scores into the same mean and standard deviation as the human survey responses for each mobility aid type, then applies a binary threshold:</p>
+
+      <div class="formula-box">
+        <div class="formula-line">z = (gemini_score &minus; &mu;_gemini) / (&sigma;_gemini + &epsilon;)</div>
+        <div class="formula-line">recalibrated = z &times; &sigma;_survey + &mu;_survey</div>
+        <div class="formula-line">binary_label = 1 &nbsp;if&nbsp; recalibrated &ge; 2.5 &nbsp;else&nbsp; 0</div>
+        <div class="formula-caption">This ensures binary labels reflect human-calibrated thresholds rather than raw model outputs — an active, principled response to AI bias in label generation.</div>
+      </div>
+
+      <h3 class="subsection">Class Balance After Binarization</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Mobility Aid Type</th><th>Accessible (1)</th><th>Inaccessible (0)</th></tr></thead>
+          <tbody>
+            <tr><td>Manual wheelchair</td><td>63.2%</td><td>36.8%</td></tr>
+            <tr><td>Electric wheelchair</td><td>76.8%</td><td>23.2%</td></tr>
+            <tr><td>Walker</td><td>30.3%</td><td>69.7%</td></tr>
+            <tr><td>Walking cane</td><td>74.8%</td><td>25.2%</td></tr>
+            <tr><td>Mobility scooter</td><td>76.8%</td><td>23.2%</td></tr>
+            <tr><td>Mobility impairment, no aid</td><td>74.8%</td><td>25.2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-small text-muted mt-2">The walker class is notably imbalanced (30.3% accessible). This reflects that walker raw Gemini scores were not recalibrated, and the 2.611 mean score placed many locations below the 2.5 binary threshold. This imbalance was one factor explored during ViT fine-tuning.</p>
+    </div>
+  </section>
+
+  <!-- ── MAE PRE-TRAINING ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-innovation">&#9733; Innovation</span>
+        <span class="badge badge-feasibility">&#10003; Feasibility</span>
+      </div>
+      <h2 class="section-title">Masked Autoencoder (MAE) Pre-Training</h2>
+      <p class="lead">Before fine-tuning for accessibility classification, the model was pre-trained on domain-specific street images using self-supervised Masked Autoencoder methodology — giving it a head start on the visual features that matter for sidewalk accessibility assessment.</p>
+
+      <div class="two-col">
+        <div>
+          <p>A ViT pre-trained on ImageNet learns general visual features but has no specific knowledge of street-level images, sidewalk surfaces, kerbs, ramps, or urban geometry. MAE pre-training on our Montreal street images addresses this by teaching the model to reconstruct masked patches — a self-supervised task that forces learning of domain-relevant structure without any labels.</p>
+          <p>The MAE encoder (~85M parameters of a ViT-Base architecture) was then used as the backbone initialisation for all subsequent supervised fine-tuning passes — replacing the standard ImageNet starting point.</p>
+        </div>
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">🧠</span>
+            <p class="ph-title">MAE reconstruction example</p>
+            <p class="ph-hint">Replace with: images/mae-reconstruction.jpg</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Training Configuration</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Training data</td><td>Street-level images from three data collection repositories</td></tr>
+            <tr><td>Target epochs</td><td>200</td></tr>
+            <tr><td>Completed epochs</td><td>95 (halted due to time constraints)</td></tr>
+            <tr><td>Steps per epoch</td><td>975</td></tr>
+            <tr><td>Approx. time per epoch</td><td>536–553 seconds (~9 minutes)</td></tr>
+            <tr><td>Checkpoint frequency</td><td>Every 5 epochs to Google Drive</td></tr>
+            <tr><td>Optimisation target</td><td>Masked patch reconstruction loss (MSE)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subsection">Training Loss Curve</h3>
+      <p>The rapid early drop from 1.84 to 0.47 in the first 10 epochs reflects fast acquisition of low-level visual structure. The continued slow decrease through epoch 95 indicates progressive refinement of higher-level representations. The model was halted at 95 epochs due to time constraints; further training would likely improve ViT performance.</p>
+
+      <div class="table-wrap mt-3">
+        <table class="data-table">
+          <thead><tr><th>Epoch</th><th>Reconstruction Loss</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>1.8415</td></tr>
+            <tr><td>10</td><td>0.4671</td></tr>
+            <tr><td>20</td><td>0.4159</td></tr>
+            <tr><td>30</td><td>0.4043</td></tr>
+            <tr><td>40</td><td>0.4000</td></tr>
+            <tr><td>50</td><td>0.3956</td></tr>
+            <tr><td>60</td><td>0.3926</td></tr>
+            <tr><td>70</td><td>0.3896</td></tr>
+            <tr><td>80</td><td>0.3858</td></tr>
+            <tr><td>90</td><td>0.3824</td></tr>
+            <tr><td>95 (final)</td><td>0.3813</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="img-placeholder mt-3">
+        <span class="ph-icon">📈</span>
+        <p class="ph-title">MAE Training Loss Curve Graph</p>
+        <p class="ph-hint">Replace with: images/mae-loss-curve.png</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VIT FINE-TUNING ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-innovation">&#9733; Innovation</span>
+        <span class="badge badge-feasibility">&#10003; Feasibility</span>
+      </div>
+      <h2 class="section-title">Vision Transformer Fine-Tuning</h2>
+      <p class="lead">Six rounds of supervised fine-tuning on the MAE-pre-trained encoder. Pass 1 was selected for the production application, achieving the best balance of accuracy and per-class performance.</p>
+
+      <h3 class="subsection">Fine-Tuning Architecture</h3>
+      <p>All six passes used a two-phase training strategy:</p>
+      <div class="table-wrap mt-3">
+        <table class="data-table">
+          <thead><tr><th>Phase</th><th>Trainable Parameters</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Phase 1 — Heads Only</td>
+              <td>~1.19M</td>
+              <td>Classification heads only. Encoder weights frozen. Allows new layers to align with pre-trained representations before any disruptive full-model updates.</td>
+            </tr>
+            <tr>
+              <td>Phase 2 — Full Model</td>
+              <td>~87.0M</td>
+              <td>Entire model (encoder + classification heads) trained end-to-end. Allows the encoder to adapt its representations specifically for accessibility classification.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-small text-muted mt-2">The classification head outputs a binary prediction (accessible / inaccessible) for each of the six mobility aid types independently — six parallel binary classifications from a single image forward pass.</p>
+
+      <h3 class="subsection">Evaluation Metrics</h3>
+      <ul class="styled-list">
+        <li><strong>Validation Accuracy:</strong> Overall fraction of correct binary predictions across all classes and images in the validation set.</li>
+        <li><strong>Mean F1 Score:</strong> Macro-averaged F1 across all six mobility aid classes. Preferred over accuracy given class imbalances — balances precision and recall for both accessible and inaccessible predictions.</li>
+      </ul>
+
+      <h3 class="subsection mt-4">Pass-by-Pass Summary</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Pass</th>
+              <th>Best Val Mean F1</th>
+              <th>Best Val Accuracy</th>
+              <th>Key Changes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-highlight">
+              <td>Pass 1 ★ (Deployed)</td>
+              <td>0.726</td>
+              <td>76.1%</td>
+              <td>Baseline: MAE encoder weights, standard dropout (0.2), lr=1e-5 Phase 2, all 6 output heads</td>
+            </tr>
+            <tr>
+              <td>Pass 2</td>
+              <td>0.669</td>
+              <td>—</td>
+              <td>Added label smoothing (0.1), increased dropout (0.2→0.35), reduced lr in Phase 2</td>
+            </tr>
+            <tr>
+              <td>Pass 3</td>
+              <td>0.641</td>
+              <td>—</td>
+              <td>Added weighted random sampling to address walker class imbalance</td>
+            </tr>
+            <tr>
+              <td>Pass 4</td>
+              <td>0.685</td>
+              <td>~79.5%</td>
+              <td>Removed walker class head; removed weighted sampling; dropout back to 0.2</td>
+            </tr>
+            <tr>
+              <td>Pass 5</td>
+              <td>0.651</td>
+              <td>—</td>
+              <td>Downsampled majority classes in training data</td>
+            </tr>
+            <tr>
+              <td>Pass 6</td>
+              <td>0.608</td>
+              <td>—</td>
+              <td>Added more data, changed walker threshold, no downsampling</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight-band mt-4">
+        <h3>Why Pass 1 Over Later Passes?</h3>
+        <p>Pass 4 achieved a higher validation accuracy (~79.5%) but a lower mean F1 (0.685) — and removed the walker class entirely. Since mean F1 better captures balanced performance across all classes (including the imbalanced walker class), Pass 1 was selected as the most comprehensively performant model. Later passes showed that aggressive regularisation and data manipulation tended to hurt rather than help, suggesting the MAE encoder already provided strong generalisation.</p>
+      </div>
+
+      <h3 class="subsection">Pass 1 — Detailed Results</h3>
+      <div class="two-col mt-3">
+        <div>
+          <p style="font-weight:700;color:var(--teal-dark);margin-bottom:0.5rem">Phase 1: Classification Heads Only</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <tbody>
+                <tr><td>Trainable parameters</td><td>1,187,334 (~1.19M)</td></tr>
+                <tr><td>Epochs run</td><td>10</td></tr>
+                <tr><td>Best epoch</td><td>3</td></tr>
+                <tr><td>Best val mean F1</td><td>0.673</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <p style="font-weight:700;color:var(--teal-dark);margin-bottom:0.5rem">Phase 2: Full Model Fine-Tuning</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <tbody>
+                <tr><td>Trainable parameters</td><td>87,012,870 (~87.0M)</td></tr>
+                <tr><td>Epochs run</td><td>50</td></tr>
+                <tr><td>Best epoch</td><td>21</td></tr>
+                <tr><td>Best val mean F1</td><td>0.726</td></tr>
+                <tr><td>Best val accuracy</td><td>76.1%</td></tr>
+                <tr><td>Per-class F1 range</td><td>~0.70–0.75</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Per-Class F1 Scores (Pass 1, Phase 2, Best Epoch)</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Mobility Aid Type</th><th>Approximate F1 Score</th></tr></thead>
+          <tbody>
+            <tr><td>Manual wheelchair</td><td>~0.72</td></tr>
+            <tr><td>Electric wheelchair</td><td>~0.73</td></tr>
+            <tr><td>Walker</td><td>~0.70</td></tr>
+            <tr><td>Walking cane</td><td>~0.73</td></tr>
+            <tr><td>Mobility scooter</td><td>~0.74</td></tr>
+            <tr><td>Mobility impairment, no aid</td><td>~0.75</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="img-placeholder mt-3">
+        <span class="ph-icon">📊</span>
+        <p class="ph-title">ViT Training Curves — F1 and Accuracy by Epoch</p>
+        <p class="ph-hint">Replace with: images/vit-training-curves.png</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VLM VALIDATION ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-innovation">&#9733; Innovation</span>
+        <span class="badge badge-ethics">&#10003; Ethics</span>
+      </div>
+      <h2 class="section-title">VLM Validation Study</h2>
+      <p class="lead">How well do Vision-Language Models agree with human accessibility judgements? We ran a formal correlation study to find out — and used the findings to inform our label quality controls.</p>
+
+      <div class="two-col">
+        <div>
+          <p>A key scientific question in this project: if we used Gemini to generate training labels, how well do Gemini's outputs correlate with what human raters would actually say? This matters both as validation of our label quality and as evidence for or against VLM-based accessibility assessment in general.</p>
+          <p>The team conducted a formal correlation study comparing three VLMs against human survey scores from 18 real-world Montreal locations.</p>
+        </div>
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">🔬</span>
+            <p class="ph-title">Validation study locations</p>
+            <p class="ph-hint">Replace with: images/validation-map.jpg</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Study Design</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Parameter</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>Reference scores</td><td>Human survey ratings for electric wheelchair accessibility</td></tr>
+            <tr><td>Locations tested</td><td>18 Montreal locations (KR_01–KR_10, MH_02–MH_19)</td></tr>
+            <tr><td>VLMs evaluated</td><td>Gemma 3 4B, Qwen2-VL-2B, Gemini 2.5 Flash</td></tr>
+            <tr><td>Statistical tests</td><td>Spearman rank correlation, Pearson r, Kendall's &tau;</td></tr>
+            <tr><td>Significance threshold</td><td>&alpha; = 0.05</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subsection">Results</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Model</th><th>Spearman &rho;</th><th>Pearson r</th><th>Kendall &tau;</th><th>Significant?</th></tr></thead>
+          <tbody>
+            <tr><td>Gemma 3 4B</td><td>&minus;0.055 (p=0.828)</td><td>&minus;0.080 (p=0.753)</td><td>&minus;0.049 (p=0.820)</td><td>No</td></tr>
+            <tr><td>Qwen2-VL-2B</td><td>+0.331 (p=0.180)</td><td>+0.277 (p=0.266)</td><td>+0.295 (p=0.173)</td><td>No</td></tr>
+            <tr><td>Gemini 2.5 Flash</td><td>+0.190 (p=0.451)</td><td>+0.173 (p=0.493)</td><td>+0.160 (p=0.450)</td><td>No</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Panel Q&A: Q2 — woven after VLM results -->
+      <div class="panel-qa mt-4">
+        <p class="qa-label">Panel Q&amp;A</p>
+        <p class="qa-q">How was the VLM validated against human judgement, and what do the results mean?</p>
+        <div class="qa-a">
+          <p>None of the three VLMs showed statistically significant correlation with human survey scores at &alpha;=0.05. But the key point is why: with n=18 locations, the study is fundamentally underpowered. Detecting a moderate correlation (Spearman &rho;&approx;0.3) requires approximately n=55 for 80% statistical power. Non-significance does not mean zero correlation — it means we had insufficient data to confirm or deny one.</p>
+          <p class="mt-2">Qwen2-VL-2B showed the strongest positive correlation (&rho;=0.331), suggesting it may have the best alignment with human perception among those tested. Gemini 2.5 Flash showed moderate positive correlation (&rho;=0.190) — consistent with partial validity of the labels it generated. Gemma 3 4B showed near-zero correlation, suggesting poor alignment.</p>
+          <p class="mt-2">More importantly, we used this finding to motivate our label recalibration methodology: rather than trusting raw Gemini scores, we z-score normalised them to match the human survey distribution before binarizing. This ensures our binary labels reflect human-calibrated thresholds, not raw model outputs — a principled, active response to the uncertainty in VLM–human alignment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NEXT PAGE ── -->
+  <section class="section-sm section-dark text-center">
+    <div class="container">
+      <p style="opacity:0.75;margin-bottom:1rem">Next: How the ML pipeline powers the routing application</p>
+      <a href="application.html" class="btn btn-orange">The Application &rarr;</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="brand">Urban<span>Access</span></span>
+      <p>AI-powered accessible routing for Montreal.<br>Built at the AI4Good Lab — Demo Day 2026.</p>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="community.html">Problem &amp; Community</a>
+      <a href="pipeline.html">ML Pipeline</a>
+      <a href="application.html">The App</a>
+      <a href="impact.html">Impact &amp; Vision</a>
+    </nav>
+  </div>
+  <div class="footer-copyright">AI4Good Lab &middot; Montreal &middot; June 2026</div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

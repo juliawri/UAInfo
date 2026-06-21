@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Access — AI-Powered Accessible Routing for Montreal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="brand">Urban<span>Access</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="community.html">Problem &amp; Community</a></li>
+    <li><a href="pipeline.html">ML Pipeline</a></li>
+    <li><a href="application.html">The App</a></li>
+    <li><a href="impact.html">Impact &amp; Vision</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">AI4Good Lab — Demo Day 2026</p>
+      <h1>Navigation That Actually Understands Accessibility</h1>
+      <p>Urban Access uses computer vision and AI to recommend the most accessible pedestrian routes in Montreal — tailored to your specific mobility aid.</p>
+      <div class="hero-btns">
+        <a href="application.html" class="btn btn-orange">See How It Works</a>
+        <a href="pipeline.html"    class="btn btn-outline">ML Pipeline</a>
+      </div>
+      <p class="hero-sub">AI4Good Lab &middot; Montreal &middot; June 2026</p>
+    </div>
+  </section>
+
+  <!-- ── STATS BAR ── -->
+  <div class="stats-bar">
+    <div class="stat-item"><span class="num">31,887</span><span class="lbl">Labelled street images</span></div>
+    <div class="stat-item"><span class="num">14,000+</span><span class="lbl">Montreal locations mapped</span></div>
+    <div class="stat-item"><span class="num">76.1%</span><span class="lbl">ViT validation accuracy</span></div>
+    <div class="stat-item"><span class="num">6</span><span class="lbl">Mobility aid types supported</span></div>
+    <div class="stat-item"><span class="num">200k+</span><span class="lbl">Montrealers who could benefit</span></div>
+  </div>
+
+  <!-- ── WHAT IS URBAN ACCESS ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <h2 class="section-title">What is Urban Access?</h2>
+      <p class="lead">A routing tool that reflects real sidewalk conditions — not just distance and traffic — so that people with mobility impairments can plan journeys that are actually possible for them.</p>
+
+      <div class="pull-quote">
+        "What if your navigation app actually understood what it's like to use a wheelchair?"
+      </div>
+
+      <div class="two-col">
+        <div>
+          <p>Existing tools like Google Maps treat all pedestrian routes as equivalent. They don't know whether a curb cut is present, whether a ramp is graded for a power wheelchair, or whether a construction zone has blocked an accessible path entirely.</p>
+          <p>Urban Access changes that. Using <strong>AI-scored street-level images from Mapillary</strong>, a fine-tuned <strong>Vision Transformer</strong>, and a <strong>large language model</strong> that synthesises accessibility signals into plain-language directions, Urban Access recommends the best route for your specific mobility aid — with explanations of why.</p>
+          <p>The project supports six mobility aid types: manual wheelchair, electric wheelchair, walker, walking cane, mobility scooter, and mobility impairment without aid.</p>
+        </div>
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">📱</span>
+            <p class="ph-title">App Screenshot — Route Recommendation</p>
+            <p class="ph-hint">Replace with: images/app-screenshot.jpg</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE PROBLEM ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <h2 class="section-title">The Problem</h2>
+      <p class="lead">Montreal is home to over 200,000 residents with mobility impairments. The city has invested in accessible infrastructure — but the gap is in the routes between destinations, not the destinations themselves.</p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🚧</span>
+          <h3>Sidewalk Barriers</h3>
+          <p>Cracked or uneven pavement, missing curb cuts, cobblestone surfaces, and construction zones create unpredictable hazards that change daily.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🏔️</span>
+          <h3>Terrain & Grade</h3>
+          <p>Steep inclines and elevation changes are passable for a walking cane but can be impassable for a manual wheelchair or mobility scooter.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🌨️</span>
+          <h3>Seasonal Changes</h3>
+          <p>Montreal winters dramatically change sidewalk conditions. Snow and ice accumulation can make an otherwise accessible route unsafe overnight.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🗺️</span>
+          <h3>The Last-Mile Gap</h3>
+          <p>A government building may be fully accessible — but if the 400 metres of sidewalk leading to it are not, it is effectively inaccessible. Existing tools miss this entirely.</p>
+        </div>
+      </div>
+
+      <p class="mt-4"><a href="community.html" class="btn btn-orange" style="display:inline-block">Our Community Response &rarr;</a></p>
+    </div>
+  </section>
+
+  <!-- ── THREE AI LAYERS ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-innovation">&#9733; Innovation</span>
+        <span class="badge badge-feasibility">&#10003; Feasibility</span>
+      </div>
+      <h2 class="section-title">Three AI Layers, One Recommendation</h2>
+      <p class="lead">Urban Access combines computer vision, vision-language models, and a large language model into a single seamless routing pipeline.</p>
+
+      <div class="three-col mt-3">
+        <div class="highlight-band">
+          <h3>1. Vision Transformer (ViT)</h3>
+          <p style="font-size:0.9rem;color:var(--text-muted)">A fine-tuned ViT scores each street-level image for accessibility across six mobility aid types. Trained on 31,887 labelled Montreal images. Best mean F1: <strong>0.726</strong>.</p>
+        </div>
+        <div class="highlight-band">
+          <h3>2. VLM Secondary Scoring</h3>
+          <p style="font-size:0.9rem;color:var(--text-muted)">Gemini 2.5 Flash provides richer contextual assessments at the most uncertain or critical route points — intersections, ramps, construction zones — with natural-language justifications.</p>
+        </div>
+        <div class="highlight-band">
+          <h3>3. LLM Route Synthesis</h3>
+          <p style="font-size:0.9rem;color:var(--text-muted)">An open-source LLM synthesises ViT scores, VLM annotations, pedestrian safety data, construction data, gradient, and user feedback into a ranked route recommendation with plain-language explanations.</p>
+        </div>
+      </div>
+
+      <p class="mt-4"><a href="pipeline.html" class="btn btn-orange" style="display:inline-block">Full ML Pipeline &rarr;</a></p>
+    </div>
+  </section>
+
+  <!-- ── COMMUNITY GROUNDING ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-ethics">&#10003; Ethics</span>
+        <span class="badge badge-pitch">&#9733; Pitch</span>
+      </div>
+      <h2 class="section-title">Grounded in Community</h2>
+      <p class="lead">The system's design was shaped from the start by people with direct experience of accessibility barriers — not assumed by the team.</p>
+
+      <div class="two-col">
+        <div>
+          <p>Urban Access consulted with disability advocates and urban planning researchers before writing a line of model code. Our survey campaign reached <strong>30+ disability-focused community groups</strong> across Montreal to build ground-truth accessibility labels.</p>
+          <p>Two key advisors shaped the project's direction:</p>
+          <ul class="styled-list mt-2">
+            <li><strong>Rashid Mushkani</strong> — urban planning researcher who introduced the concept of the "last-mile gap" in accessibility, directly shaping our routing focus</li>
+            <li><strong>Laurence Parent</strong> — Plateau-Mont-Royal city councillor who provided iterative feedback throughout development to validate that outputs reflect real disabled users' needs</li>
+          </ul>
+          <p class="mt-3"><a href="community.html" class="btn btn-orange" style="display:inline-block">Full Community Story &rarr;</a></p>
+        </div>
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">🤝</span>
+            <p class="ph-title">Community Engagement Photo</p>
+            <p class="ph-hint">Replace with: images/community.jpg</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PHOTO GALLERY PLACEHOLDER ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <h2 class="section-title">Montreal in Focus</h2>
+      <p class="lead">Urban Access analyses thousands of images like these across the city to understand accessibility at street level.</p>
+      <div class="img-grid">
+        <div class="img-placeholder" style="padding:2rem">
+          <span class="ph-icon">📸</span>
+          <p class="ph-title">Accessible curb cut example</p>
+          <p class="ph-hint">images/montreal-1.jpg</p>
+        </div>
+        <div class="img-placeholder" style="padding:2rem">
+          <span class="ph-icon">📸</span>
+          <p class="ph-title">Inaccessible sidewalk example</p>
+          <p class="ph-hint">images/montreal-2.jpg</p>
+        </div>
+        <div class="img-placeholder" style="padding:2rem">
+          <span class="ph-icon">📸</span>
+          <p class="ph-title">Construction zone barrier</p>
+          <p class="ph-hint">images/montreal-3.jpg</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IMPACT TEASER ── -->
+  <section class="section section-dark">
+    <div class="container text-center">
+      <h2 class="section-title">Built for Montreal. Ready to Scale.</h2>
+      <p style="opacity:0.8;max-width:600px;margin:1rem auto 2rem">The pipeline is city-agnostic. Wherever Mapillary has coverage, Urban Access can be replicated — reaching 4 million+ Canadians with mobility impairments.</p>
+      <div class="metric-highlights" style="max-width:700px;margin:0 auto 2rem">
+        <div class="metric-box warm"><span class="val">200k+</span><span class="lbl">Montreal beneficiaries</span></div>
+        <div class="metric-box alt"><span class="val">4M+</span><span class="lbl">Canadians with mobility impairments</span></div>
+        <div class="metric-box"><span class="val">Global</span><span class="lbl">Mapillary coverage worldwide</span></div>
+      </div>
+      <a href="impact.html" class="btn btn-orange">Impact &amp; Vision &rarr;</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="brand">Urban<span>Access</span></span>
+      <p>AI-powered accessible routing for Montreal.<br>Built at the AI4Good Lab — Demo Day 2026.</p>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="community.html">Problem &amp; Community</a>
+      <a href="pipeline.html">ML Pipeline</a>
+      <a href="application.html">The App</a>
+      <a href="impact.html">Impact &amp; Vision</a>
+    </nav>
+  </div>
+  <div class="footer-copyright">AI4Good Lab &middot; Montreal &middot; June 2026</div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem &amp; Community — Urban Access</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="brand">Urban<span>Access</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="community.html" class="active">Problem &amp; Community</a></li>
+    <li><a href="pipeline.html">ML Pipeline</a></li>
+    <li><a href="application.html">The App</a></li>
+    <li><a href="impact.html">Impact &amp; Vision</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<main>
+
+  <div class="page-hero">
+    <h1>Problem &amp; Community</h1>
+    <p>How we identified the right problem, and why community shaped every decision we made.</p>
+  </div>
+
+  <!-- ── THE PROBLEM ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-pitch">&#9733; Pitch Quality</span>
+        <span class="badge badge-impact">&#9733; Impact</span>
+      </div>
+      <h2 class="section-title">The Accessibility Gap in Urban Navigation</h2>
+      <p class="lead">Montreal is home to over 200,000 residents with mobility impairments. While the city has invested in accessible infrastructure, existing navigation tools were not designed with their daily reality in mind.</p>
+
+      <div class="two-col">
+        <div>
+          <p>Standard mapping tools — Google Maps, Apple Maps — route pedestrians based on distance and travel time. They have no concept of <em>ground-level conditions</em>: whether a sidewalk is cracked, whether a ramp is actually navigable, whether a construction zone has closed the only accessible path through a block.</p>
+          <p>The result is a navigation experience that fails people with mobility impairments in ways the tools cannot even measure or report on. Users must rely on memory, word-of-mouth, or trial and error.</p>
+          <p>Urban Access addresses this gap directly: by integrating computer vision and street-level imagery into the routing layer, it gives users a route recommendation that reflects the actual, present-day state of Montreal's sidewalks — not an idealised map.</p>
+        </div>
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">🗺️</span>
+            <p class="ph-title">Montreal Accessibility Map</p>
+            <p class="ph-hint">Replace with: images/montreal-map.jpg</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection">What Standard Maps Miss</h3>
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🛤️</span>
+          <h3>Surface Quality</h3>
+          <p>Cracked pavement, cobblestones, and uneven surfaces are passable for some aids and impassable for others. Maps treat all pedestrian paths as equivalent.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">↗️</span>
+          <h3>Gradient & Elevation</h3>
+          <p>Steepness matters enormously for manual wheelchair and mobility scooter users. A route that looks short on a map may be physically exhausting or unsafe.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🚧</span>
+          <h3>Construction Zones</h3>
+          <p>Temporary construction can close the only accessible path through a block for months. This information is not reflected in standard navigation tools in real time.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">❄️</span>
+          <h3>Winter Conditions</h3>
+          <p>Montreal winters make snow and ice accumulation a serious seasonal barrier. Accessible routes in summer may become impassable in January.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔄</span>
+          <h3>Aid-Specific Needs</h3>
+          <p>A route suitable for a walking cane may be impassable for an electric wheelchair. Each mobility aid has different requirements — and existing tools treat all pedestrians identically.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🚦</span>
+          <h3>Pedestrian Safety</h3>
+          <p>Intersection design, signal timing, and crossing hazards affect mobility-impaired users disproportionately but are not factored into standard route recommendations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMMUNITY OUTREACH ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-ethics">&#10003; Ethics</span>
+        <span class="badge badge-impact">&#9733; Impact</span>
+      </div>
+      <h2 class="section-title">Community Consultation</h2>
+      <p class="lead">Meaningful community engagement was central to Urban Access from day one. The system's focus, categories, and outputs were shaped by people with direct lived experience of accessibility barriers — not assumed by the team.</p>
+
+      <div class="img-placeholder">
+        <span class="ph-icon">👥</span>
+        <p class="ph-title">Team consultation session</p>
+        <p class="ph-hint">Replace with: images/consultation.jpg</p>
+      </div>
+
+      <div class="people-grid mt-4">
+
+        <div class="person-card">
+          <div class="person-photo">
+            <img src="images/rashid.jpg" alt="Rashid Mushkani" onerror="this.style.display='none';this.parentElement.textContent='👤'">
+          </div>
+          <h4>Rashid Mushkani</h4>
+          <p class="person-role">Urban Planning &amp; AI Researcher</p>
+          <p>Rashid provided the conceptual grounding for our routing focus. His key insight — that <strong>accessibility must be continuous, not just at destinations</strong> — shifted our approach entirely. A fully accessible government building is effectively inaccessible if the sidewalk leading to it is not.</p>
+          <p class="mt-2">He also connected the team to <strong>Promo-Accès</strong>, a Montreal-based accessibility organisation, which expanded our survey distribution significantly.</p>
+        </div>
+
+        <div class="person-card">
+          <div class="person-photo">
+            <img src="images/laurence.jpg" alt="Laurence Parent" onerror="this.style.display='none';this.parentElement.textContent='👤'">
+          </div>
+          <h4>Laurence Parent</h4>
+          <p class="person-role">Plateau-Mont-Royal City Councillor</p>
+          <p>Laurence provided <strong>ongoing iterative feedback</strong> throughout the project's development — not a one-time consultation. As a public official in one of Montreal's most walkable but challenging neighbourhoods, she verified that our mobility aid categories, scoring granularity, and route explanations accurately reflected what disabled individuals actually need.</p>
+          <p class="mt-2">Her engagement constituted a form of continuous, community-grounded validation from a policy and lived-experience perspective.</p>
+        </div>
+
+      </div>
+
+      <!-- Panel Q&A: Q1 — woven after the stakeholder section -->
+      <div class="panel-qa mt-4">
+        <p class="qa-label">Panel Q&amp;A</p>
+        <p class="qa-q">What did you specifically learn from Rashid Mushkani and Laurence Parent?</p>
+        <div class="qa-a">
+          <p><strong>From Rashid:</strong> The central insight was the concept of universal accessibility and the last-mile problem. Even when destination buildings are accessible, the paths leading to them often are not — and existing navigation tools have no way to represent this. This directly shaped our decision to build a route recommendation system rather than a static accessibility map. Rashid also facilitated our connection to Promo-Accès, which improved our survey distribution strategy substantially.</p>
+          <p class="mt-2"><strong>From Laurence:</strong> Iterative feedback throughout development, not a one-time consultation. She helped us verify that our chosen mobility aid categories, the granularity of our scoring, and the nature of the route explanations accurately reflected what disabled individuals actually need from a navigation tool — including nuances like the importance of flagging construction zones and the need for winter-specific guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SURVEY CAMPAIGN ── -->
+  <section class="section">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-ethics">&#10003; Ethics</span>
+        <span class="badge badge-innovation">&#9733; Innovation</span>
+      </div>
+      <h2 class="section-title">Ground-Truth Survey Campaign</h2>
+      <p class="lead">To build credible accessibility labels, the team conducted a structured survey campaign — presenting real Montreal street images to community members and disability advocates for manual rating.</p>
+
+      <div class="two-col">
+        <div>
+          <p>Survey responses could not serve as direct training labels at this scale — 154 ratings across 76 images is too small to train a Vision Transformer from scratch. But they served two critical functions:</p>
+          <ul class="styled-list mt-2 mb-2">
+            <li><strong>Calibration:</strong> The survey statistics (mean and standard deviation per mobility aid type) were used to recalibrate AI-generated labels from Gemini 2.5 Flash to match human perception. See <a href="pipeline.html">ML Pipeline</a> for the full methodology.</li>
+            <li><strong>Validation:</strong> The survey provided partial external validation of the VLM scoring approach — evidence that human raters and AI raters are measuring something comparable, even if not identical.</li>
+          </ul>
+          <p>All survey data was fully anonymised. Participants rated street images only — no personally identifiable information was collected.</p>
+        </div>
+        <div>
+          <div class="img-placeholder">
+            <span class="ph-icon">📋</span>
+            <p class="ph-title">Survey Interface Screenshot</p>
+            <p class="ph-hint">Replace with: images/survey-screenshot.jpg</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap mt-4">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Distribution channels</td><td>30+ disability-focused community groups across Montreal, including Promo-Accès</td></tr>
+            <tr><td>Responses collected</td><td>154 rated image–aid pairs across 76 unique street images</td></tr>
+            <tr><td>Aid types covered</td><td>Manual wheelchair, electric wheelchair, walker, walking cane, mobility scooter, mobility impairment without aid</td></tr>
+            <tr><td>Rating scale</td><td>0–4 (0 = completely inaccessible, 4 = fully accessible)</td></tr>
+            <tr><td>Data handling</td><td>Fully anonymised; no personally identifiable information collected; participants rated images only</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subsection">Survey Statistics by Mobility Aid</h3>
+      <p>These statistics were used to recalibrate AI-generated accessibility scores before binarization. See the <a href="pipeline.html">ML Pipeline</a> page for how this works.</p>
+      <div class="table-wrap mt-3">
+        <table class="data-table">
+          <thead>
+            <tr><th>Mobility Aid Type</th><th>Survey Responses (n)</th><th>Mean Score</th><th>Std Dev</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Manual wheelchair</td><td>20</td><td>2.200</td><td>1.005</td></tr>
+            <tr><td>Electric wheelchair</td><td>54</td><td>2.704</td><td>1.039</td></tr>
+            <tr><td>Walker</td><td>38</td><td>2.211</td><td>1.069 (raw scores used — no recalibration)</td></tr>
+            <tr><td>Walking cane</td><td>40</td><td>2.400</td><td>1.033</td></tr>
+            <tr><td>Mobility scooter</td><td>n/a</td><td>2.727 (global fallback)</td><td>1.122</td></tr>
+            <tr><td>Mobility impairment, no aid</td><td>40</td><td>3.050</td><td>1.260</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRIVACY ── -->
+  <section class="section section-alt">
+    <div class="container">
+      <hr class="section-rule">
+      <div class="eval-badges">
+        <span class="badge badge-ethics">&#10003; Ethics</span>
+      </div>
+      <h2 class="section-title">Privacy as a Design Principle</h2>
+      <p class="lead">Ethical data practices were embedded from the outset — not added as an afterthought. This applies to both the survey data used to calibrate our labels and the user data collected by the application.</p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🔒</span>
+          <h3>Anonymised Survey Data</h3>
+          <p>The 154 community ratings used to calibrate our AI-generated labels contain no personally identifiable information. Participants rated images only.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🗑️</span>
+          <h3>User Data Control</h3>
+          <p>App users can delete their account and all associated feedback data at any time from within the application. No lock-in; meaningful data agency.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🛡️</span>
+          <h3>Secure Storage</h3>
+          <p>User accounts and feedback are stored in Supabase with enterprise-grade security including row-level access controls. No movement data is retained beyond what is needed for feedback weighting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NEXT PAGE ── -->
+  <section class="section-sm section-dark text-center">
+    <div class="container">
+      <p style="opacity:0.75;margin-bottom:1rem">Next: How we built the ML pipeline — dataset, training, and validation</p>
+      <a href="pipeline.html" class="btn btn-orange">ML Pipeline &rarr;</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="brand">Urban<span>Access</span></span>
+      <p>AI-powered accessible routing for Montreal.<br>Built at the AI4Good Lab — Demo Day 2026.</p>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="community.html">Problem &amp; Community</a>
+      <a href="pipeline.html">ML Pipeline</a>
+      <a href="application.html">The App</a>
+      <a href="impact.html">Impact &amp; Vision</a>
+    </nav>
+  </div>
+  <div class="footer-copyright">AI4Good Lab &middot; Montreal &middot; June 2026</div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
