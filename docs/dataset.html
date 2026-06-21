@@ -33,7 +33,6 @@
   <!-- ── ACCESSIBILITY MAP ── -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title" style="margin-bottom:1.5rem">Explore our Dataset</h2>
       <div class="map-panel">
         <div class="map-panel-header">
           <span class="map-panel-title">Montreal — Sidewalk Accessibility</span>
@@ -73,11 +72,7 @@
           <p>Images from all three sources were also used in the MAE pre-training phase.</p>
         </div>
         <div>
-          <div class="img-placeholder">
-            <span class="ph-icon">🛰️</span>
-            <p class="ph-title">Mapillary coverage map for Montreal</p>
-            <p class="ph-hint">Replace with: images/mapillary-coverage.jpg</p>
-          </div>
+          <img src="images/mapillary-coverage.png" alt="Mapillary coverage map for Montreal" style="width:100%;border-radius:8px;display:block;">
         </div>
       </div>
     </div>
@@ -235,13 +230,13 @@
   });
 
   (function () {
-    // sky (#cce8f4) → sky-dark → teal-light → teal-mid → dark teal (#1e3d3d)
+    // dark teal (#1e3d3d) → teal-mid → teal-light → sky-dark → sky (#cce8f4)
     var STOPS = [
-      [0, [204, 232, 244]],
-      [1, [157, 205, 232]],
+      [0, [30,  61,  61 ]],
+      [1, [45,  90,  90 ]],
       [2, [61,  112, 112]],
-      [3, [45,  90,  90 ]],
-      [4, [30,  61,  61 ]]
+      [3, [157, 205, 232]],
+      [4, [204, 232, 244]]
     ];
 
     function scoreColor(s) {
@@ -255,7 +250,7 @@
           return 'rgb(' + r + ',' + g + ',' + b + ')';
         }
       }
-      return 'rgb(30,61,61)';
+      return 'rgb(204,232,244)';
     }
 
     var AIDS = [
