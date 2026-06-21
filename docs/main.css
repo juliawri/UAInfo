@@ -641,7 +641,7 @@ footer nav a:hover { color: white; }
 }
 
 .legend-heat {
-  background: linear-gradient(to right, #2d7070, #f5a623, #c0392b) !important;
+  background: linear-gradient(to right, #cce8f4, #9dcde8, #3d7070, #1e3d3d) !important;
 }
 
 .map-loading {

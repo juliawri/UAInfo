@@ -157,11 +157,7 @@
           <p>The core methodology — MAE pre-training, VLM-calibrated labelling, multi-signal LLM routing — is the same regardless of city.</p>
         </div>
         <div>
-          <div class="img-placeholder">
-            <span class="ph-icon">🌍</span>
-            <p class="ph-title">Cities with Mapillary coverage</p>
-            <p class="ph-hint">Replace with: images/global-coverage.jpg</p>
-          </div>
+          <img src="images/mapillary_coverage.jpg" alt="Cities with Mapillary coverage" style="width:100%;border-radius:10px;display:block;">
         </div>
       </div>
 
@@ -364,7 +360,7 @@
       radius: 18,
       blur: 15,
       maxZoom: 17,
-      gradient: {0.35: '#2d7070', 0.55: '#f5a623', 0.8: '#e05e00', 1.0: '#c0392b'}
+      gradient: {0.3: '#cce8f4', 0.55: '#9dcde8', 0.75: '#3d7070', 1.0: '#1e3d3d'}
     }).addTo(map);
 
     var dotsGroup = L.layerGroup();
@@ -400,7 +396,7 @@
       heatLayer.addTo(map);
       legendBar.className = 'legend-gradient-bar legend-heat';
       legendLbls.innerHTML = '<span>Accessible</span><span>Moderate</span><span>Inaccessible</span>';
-      legendCap.textContent = 'Heat intensity = inaccessibility. Red/orange areas have the most barriers — strongest case for infrastructure investment.';
+      legendCap.textContent = 'Heat intensity = inaccessibility. Dark teal areas have the most barriers — strongest case for infrastructure investment.';
     });
 
     btnDots.addEventListener('click', function() {
