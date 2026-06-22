@@ -117,33 +117,99 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Technical Architecture</h2>
-      <p class="lead">Built entirely on open-source components and free API tiers and designed to be deployable without a large infrastructure budget.</p>
+      <p class="lead">Built entirely on open-source components and free API tiers, designed to be deployable without a large infrastructure budget.</p>
 
-      <div class="two-col" style="align-items:stretch;">
-        <div>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead><tr><th>Component</th><th>Technology</th></tr></thead>
-              <tbody>
-                <tr><td>Backend</td><td>Python (FastAPI)</td></tr>
-                <tr><td>ML inference</td><td>PyTorch (ViT), Gemini API (VLM)</td></tr>
-                <tr><td>Database</td><td>Supabase (user accounts, feedback)</td></tr>
-                <tr><td>Image source</td><td>Mapillary API</td></tr>
-                <tr><td>Routing engine</td><td>OpenStreetMap / OSRM</td></tr>
-                <tr><td>Hosting</td><td>Google Cloud Platform (free tier, 3-month trial)</td></tr>
-                <tr><td>LLM</td><td>Open-source language model</td></tr>
-              </tbody>
-            </table>
-          </div>
+      <div style="text-align:center;margin-bottom:2.75rem;">
+        <img src="images/architecture-diagram.png" alt="Urban Access technical architecture diagram" style="max-width:100%;border-radius:10px;border:1px solid var(--border);box-shadow:0 4px 20px rgba(30,61,61,0.10);">
+      </div>
 
-          <div class="info-box mt-3">
-            <p><strong>Current constraint:</strong> The Google Cloud free tier hosting expires after 3 months. Securing stable hosting, possibly through grant funding, a university partnership, or non-profit cloud credits, is the primary feasibility challenge for sustained deployment. All other components are open-source or available on free tiers.</p>
+      <h3 style="font-size:1.05rem;font-weight:700;color:var(--teal-dark);margin-bottom:1.25rem;letter-spacing:-0.01em;">Full Technology Stack</h3>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem;margin-bottom:2rem;">
+
+        <!-- Backend -->
+        <div style="background:var(--bg-warm);border:1px solid var(--border);border-radius:12px;padding:1.2rem;border-top:3px solid var(--teal-light);">
+          <div style="font-size:0.67rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:0.85rem;">Backend</div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="" style="width:14px;height:14px;flex-shrink:0;">Python</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/fastapi" alt="" style="width:14px;height:14px;flex-shrink:0;">FastAPI</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">Uvicorn</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">SQLAlchemy</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg" alt="" style="width:14px;height:14px;flex-shrink:0;">SQLite</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/pydantic" alt="" style="width:14px;height:14px;flex-shrink:0;">Pydantic</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">python-dotenv</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">python-jose</span>
           </div>
         </div>
 
-        <div style="display:flex;align-items:center;align-self:stretch;">
-          <img src="images/architecture-diagram.png" alt="Urban Access technical architecture diagram" style="width:115%;border-radius:8px;">
+        <!-- AI / ML -->
+        <div style="background:var(--bg-warm);border:1px solid var(--border);border-radius:12px;padding:1.2rem;border-top:3px solid var(--orange);">
+          <div style="font-size:0.67rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:0.85rem;">AI / ML</div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/googlegemini" alt="" style="width:14px;height:14px;flex-shrink:0;">Google Gemini</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">Custom ViT-B/16 (MAE)</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" alt="" style="width:14px;height:14px;flex-shrink:0;">PyTorch</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">Sentence Transformers</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/huggingface" alt="" style="width:14px;height:14px;flex-shrink:0;">HuggingFace</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">FAISS</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/scikitlearn" alt="" style="width:14px;height:14px;flex-shrink:0;">scikit-learn</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" alt="" style="width:14px;height:14px;flex-shrink:0;">NumPy</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="" style="width:14px;height:14px;flex-shrink:0;">Pandas</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">Pillow</span>
+          </div>
         </div>
+
+        <!-- Routing & Transit Data -->
+        <div style="background:var(--bg-warm);border:1px solid var(--border);border-radius:12px;padding:1.2rem;border-top:3px solid var(--sky-dark);">
+          <div style="font-size:0.67rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal-light);margin-bottom:0.85rem;">Routing &amp; Transit Data</div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">OpenTripPlanner 2.5</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="" style="width:14px;height:14px;flex-shrink:0;">Java</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">GTFS (STM)</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/openstreetmap" alt="" style="width:14px;height:14px;flex-shrink:0;">OpenStreetMap</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">polyline</span>
+          </div>
+        </div>
+
+        <!-- External APIs & Data Sources -->
+        <div style="background:var(--bg-warm);border:1px solid var(--border);border-radius:12px;padding:1.2rem;border-top:3px solid var(--teal-dark);">
+          <div style="font-size:0.67rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.85rem;">External APIs &amp; Data</div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/mapillary" alt="" style="width:14px;height:14px;flex-shrink:0;">Mapillary</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/supabase" alt="" style="width:14px;height:14px;flex-shrink:0;">Supabase</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">Montréal Open Data</span>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div style="background:var(--bg-warm);border:1px solid var(--border);border-radius:12px;padding:1.2rem;border-top:3px solid var(--sky-dark);">
+          <div style="font-size:0.67rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal-light);margin-bottom:0.85rem;">Frontend</div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="" style="width:14px;height:14px;flex-shrink:0;">React 19</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/vitejs" alt="" style="width:14px;height:14px;flex-shrink:0;">Vite</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/reactrouter" alt="" style="width:14px;height:14px;flex-shrink:0;">React Router v7</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/chakraui" alt="" style="width:14px;height:14px;flex-shrink:0;">Chakra UI v3</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">Emotion</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/leaflet" alt="" style="width:14px;height:14px;flex-shrink:0;">Leaflet</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/supabase" alt="" style="width:14px;height:14px;flex-shrink:0;">Supabase JS</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);">react-markdown</span>
+          </div>
+        </div>
+
+        <!-- Infrastructure & Tooling -->
+        <div style="background:var(--bg-warm);border:1px solid var(--border);border-radius:12px;padding:1.2rem;border-top:3px solid var(--teal-mid);">
+          <div style="font-size:0.67rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:0.85rem;">Infrastructure &amp; Tooling</div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="" style="width:14px;height:14px;flex-shrink:0;">Git</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eslint/eslint-original.svg" alt="" style="width:14px;height:14px;flex-shrink:0;">ESLint</span>
+            <span style="display:inline-flex;align-items:center;gap:0.35rem;background:white;border:1px solid var(--border);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;color:var(--text);"><img src="https://cdn.simpleicons.org/openstreetmap" alt="" style="width:14px;height:14px;flex-shrink:0;">OSM Tile Servers</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="info-box">
+        <p><strong>Current constraint:</strong> The Google Cloud free tier hosting expires after 3 months. Securing stable hosting, possibly through grant funding, a university partnership, or non-profit cloud credits, is the primary feasibility challenge for sustained deployment. All other components are open-source or available on free tiers.</p>
       </div>
     </div>
   </section>
