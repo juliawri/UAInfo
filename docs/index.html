@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Urban Access — AI-Powered Accessible Routing for Montreal</title>
+  <title>Urban Access: AI-Powered Accessible Routing for Montreal</title>
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -29,7 +29,7 @@
     <div class="hero-inner">
       <p class="hero-eyebrow">AI4Good Lab: Demo Day 2026</p>
       <h1>Navigation That Actually Understands Accessibility</h1>
-      <p>Urban Access uses computer vision and AI to recommend the most accessible pedestrian routes in Montreal — tailored to your specific mobility aid.</p>
+      <p>Urban Access uses AI, including computer vision, to recommend the most accessible pedestrian and transit routes in Montreal tailored to your specific mobility aid.</p>
       <div class="hero-btns">
         <a href="application.html" class="btn btn-orange">See How It Works</a>
         <a href="pipeline.html"    class="btn btn-outline">ML Pipeline</a>
@@ -51,7 +51,7 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">What is Urban Access?</h2>
-      <p class="lead">A routing tool that reflects real sidewalk conditions — not just distance and traffic — so that people with mobility impairments can plan journeys that are actually possible for them.</p>
+      <p class="lead">A routing tool that reflects real sidewalk conditions (not just distance and traffic) so people with mobility impairments can plan journeys that are actually possible for them.</p>
 
       <div class="pull-quote">
         "What if your navigation app actually understood what it's like to use a wheelchair?"
@@ -60,15 +60,11 @@
       <div class="two-col">
         <div>
           <p>Existing tools like Google Maps treat all pedestrian routes as equivalent. They don't know whether a curb cut is present, whether a ramp is graded for a power wheelchair, or whether a construction zone has blocked an accessible path entirely.</p>
-          <p>Urban Access changes that. Using <strong>AI-scored street-level images from Mapillary</strong>, a fine-tuned <strong>Vision Transformer</strong>, and a <strong>large language model</strong> that synthesises accessibility signals into plain-language directions, Urban Access recommends the best route for your specific mobility aid — with explanations of why.</p>
+          <p>Urban Access changes that. Using <strong>AI-scored street-level images from Mapillary</strong>, a fine-tuned <strong>Vision Transformer</strong>, and a <strong>large language model</strong> that synthesises accessibility signals into plain-language directions, Urban Access recommends the best route for your specific mobility aid with explanations of why.</p>
           <p>The project supports six mobility aid types: manual wheelchair, electric wheelchair, walker, walking cane, mobility scooter, and mobility impairment without aid.</p>
         </div>
         <div>
-          <div class="img-placeholder">
-            <span class="ph-icon">📱</span>
-            <p class="ph-title">App Screenshot — Route Recommendation</p>
-            <p class="ph-hint">Replace with: images/app-screenshot.jpg</p>
-          </div>
+          <img src="images/app-screenshot.jpg" alt="App screenshot showing route recommendation" style="width:100%;border-radius:8px;display:block;">
         </div>
       </div>
     </div>
@@ -79,7 +75,7 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">The Problem</h2>
-      <p class="lead">Montreal is home to over 200,000 residents with mobility impairments. The city has invested in accessible infrastructure — but the gap is in the routes between destinations, not the destinations themselves.</p>
+      <p class="lead">Montreal is home to over 200,000 residents with mobility impairments. The city has invested in accessible infrastructure, but accessible routes between two places can often be lacking.</p>
 
       <div class="cards">
         <div class="card">
@@ -118,11 +114,11 @@
       <div class="three-col mt-3">
         <div class="highlight-band">
           <h3>1. Vision Transformer (ViT)</h3>
-          <p style="font-size:0.9rem;color:var(--text-muted)">A fine-tuned ViT scores each street-level image for accessibility across six mobility aid types. Trained on 31,887 labelled Montreal images. Best mean F1: <strong>0.726</strong>.</p>
+          <p style="font-size:0.9rem;color:var(--text-muted)">A fine-tuned ViT scores each street-level image for accessibility across six mobility aid types. Trained on 31,887 labelled Montreal images. Best mean F1: <strong>72.6%/strong>.</p>
         </div>
         <div class="highlight-band">
           <h3>2. VLM Secondary Scoring</h3>
-          <p style="font-size:0.9rem;color:var(--text-muted)">Gemini 2.5 Flash provides richer contextual assessments at the most uncertain or critical route points — intersections, ramps, construction zones — with natural-language justifications.</p>
+          <p style="font-size:0.9rem;color:var(--text-muted)">Gemini 2.5 Flash provides richer contextual assessments at the most uncertain or critical route points such as intersections, ramps, construction zones, with natural-language justifications.</p>
         </div>
         <div class="highlight-band">
           <h3>3. LLM Route Synthesis</h3>
@@ -139,15 +135,15 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Grounded in Community</h2>
-      <p class="lead">The system's design was shaped from the start by people with direct experience of accessibility barriers — not assumed by the team.</p>
+      <p class="lead">The system's design was shaped from the start by people with direct experience of accessibility barriers and not assumed by the team.</p>
 
       <div class="two-col">
         <div>
           <p>Urban Access consulted with disability advocates and urban planning researchers before writing a line of model code. Our survey campaign reached <strong>30+ disability-focused community groups</strong> across Montreal to build ground-truth accessibility labels.</p>
           <p>Two key advisors shaped the project's direction:</p>
           <ul class="styled-list mt-2">
-            <li><strong>Rashid Mushkani</strong> — urban planning researcher who introduced the concept of the "last-mile gap" in accessibility, directly shaping our routing focus</li>
-            <li><strong>Laurence Parent</strong> — Plateau-Mont-Royal city councillor who provided iterative feedback throughout development to validate that outputs reflect real disabled users' needs</li>
+            <li><strong>Rashid Mushkani</strong> — urban planning and AI researcher who introduced the concept of the "last-mile gap" in accessibility, directly shaping our routing focus</li>
+            <li><strong>Laurence Parent</strong> — A disability advocate and Plateau-Mont-Royal borough councillor who provided iterative feedback throughout development to help validate that outputs reflect real disabled users' needs</li>
           </ul>
           <p class="mt-3"><a href="community.html" class="btn btn-orange" style="display:inline-block">Full Community Story &rarr;</a></p>
         </div>
@@ -192,7 +188,7 @@
       <div class="metric-highlights" style="max-width:700px;margin:0 auto 2rem">
         <div class="metric-box warm"><span class="val">200k+</span><span class="lbl">Montreal beneficiaries</span></div>
         <div class="metric-box alt"><span class="val">4M+</span><span class="lbl">Canadians with mobility impairments</span></div>
-        <div class="metric-box"><span class="val">Global</span><span class="lbl">Mapillary coverage worldwide</span></div>
+        <div class="metric-box"><span class="val">Global Reach</span><span class="lbl">Mapillary coverage worldwide</span></div>
       </div>
       <a href="impact.html" class="btn btn-orange">Impact &amp; Vision &rarr;</a>
     </div>
