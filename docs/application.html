@@ -9,7 +9,7 @@
 <body>
 
 <nav>
-  <a href="index.html" class="brand">Urban <span>Access</span></a>
+  <a href="index.html" class="brand">Urban<span>Access</span></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
     <li><a href="community.html">Problem &amp; Community</a></li>
@@ -26,7 +26,7 @@
 
   <div class="page-hero">
     <h1>The Application</h1>
-    <p>From user input to route recommendation — how the ML pipeline is integrated into a full-stack accessible routing tool.</p>
+    <p>From user input to route recommendation, see how the ML pipeline is integrated into a full-stack accessible routing tool.</p>
   </div>
 
   <!-- ── APP SCREENSHOTS ── -->
@@ -34,24 +34,11 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">A Working End-to-End System</h2>
-      <p class="lead">Urban Access was demonstrated live at Demo Day 2026 — a complete application taking user inputs and returning accessible route recommendations with plain-language explanations.</p>
+      <p class="lead">Urban Access is a complete application taking user inputs and returning accessible route recommendations with plain-language explanations.</p>
 
-      <div class="img-grid">
-        <div class="img-placeholder">
-          <span class="ph-icon">🗺️</span>
-          <p class="ph-title">Route selection screen</p>
-          <p class="ph-hint">images/app-route-screen.jpg</p>
-        </div>
-        <div class="img-placeholder">
-          <span class="ph-icon">♿</span>
-          <p class="ph-title">Mobility aid selection</p>
-          <p class="ph-hint">images/app-aid-selection.jpg</p>
-        </div>
-        <div class="img-placeholder">
-          <span class="ph-icon">📋</span>
-          <p class="ph-title">Route recommendation with explanation</p>
-          <p class="ph-hint">images/app-recommendation.jpg</p>
-        </div>
+      <div style="text-align:center;">
+        <video src="images/Screen_recording.mp4" autoplay muted loop playsinline
+               style="max-width:100%;border-radius:8px;display:inline-block;"></video>
       </div>
     </div>
   </section>
@@ -61,7 +48,7 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">How It Works</h2>
-      <p class="lead">Seven steps from user input to a ranked route recommendation — combining vision AI, VLM annotation, open data, and an LLM that synthesises everything into plain language.</p>
+      <p class="lead">Seven steps from user input to a ranked route recommendation, combining vision AI, VLM annotation, open data, and an LLM that synthesises everything into plain language.</p>
 
       <div class="steps mt-3">
 
@@ -85,7 +72,7 @@
           <div class="step-num">3</div>
           <div class="step-body">
             <h4>Street-Level Image Retrieval</h4>
-            <p>For each candidate route, hundreds of street-level images are retrieved from Mapillary at regular intervals along the path — using the same coordinate-based API approach developed during dataset creation.</p>
+            <p>For each candidate route, hundreds of street-level images are retrieved from Mapillary at regular intervals along the path using the same coordinate-based API approach developed during dataset creation.</p>
           </div>
         </div>
 
@@ -101,7 +88,7 @@
           <div class="step-num">5</div>
           <div class="step-body">
             <h4>VLM Secondary Scoring</h4>
-            <p>The most inaccessible or uncertain route points are passed to Gemini 2.5 Flash for a richer, contextual assessment. The VLM provides a rating and natural-language justification for why each critical location is or is not accessible — without incurring the cost of running the VLM on every image.</p>
+            <p>The most inaccessible or uncertain route points are passed to Gemini 2.5 Flash for a richer, contextual assessment. The VLM provides a rating and natural-language justification for why each critical location is or is not accessible without incurring the cost of running the VLM on every image.</p>
           </div>
         </div>
 
@@ -117,7 +104,7 @@
           <div class="step-num">7</div>
           <div class="step-body">
             <h4>LLM Route Recommendation</h4>
-            <p>An open-source LLM synthesises all signals and generates a ranked route recommendation: the primary recommended route with a plain-language explanation, two alternatives with comparative reasoning, and specific accessibility warnings for notable barriers along each route.</p>
+            <p>An open-source LLM from HuggingFace synthesises all signals and generates a ranked route recommendation: the primary recommended route with a plain-language explanation, two alternatives with comparative reasoning, and specific accessibility warnings for notable barriers along each route.</p>
           </div>
         </div>
 
@@ -130,7 +117,7 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Technical Architecture</h2>
-      <p class="lead">Built entirely on open-source components and free API tiers — designed to be deployable without a large infrastructure budget.</p>
+      <p class="lead">Built entirely on open-source components and free API tiers and designed to be deployable without a large infrastructure budget.</p>
 
       <div class="two-col" style="align-items:stretch;">
         <div>
@@ -150,7 +137,7 @@
           </div>
 
           <div class="info-box mt-3">
-            <p><strong>Current constraint:</strong> The Google Cloud free tier hosting expires after 3 months. Securing stable hosting — through grant funding, a university partnership, or non-profit cloud credits — is the primary feasibility challenge for sustained deployment. All other components are open-source or available on free tiers.</p>
+            <p><strong>Current constraint:</strong> The Google Cloud free tier hosting expires after 3 months. Securing stable hosting, possibly through grant funding, a university partnership, or non-profit cloud credits, is the primary feasibility challenge for sustained deployment. All other components are open-source or available on free tiers.</p>
           </div>
         </div>
 
@@ -177,12 +164,12 @@
         <div class="card">
           <span class="card-icon">⚖️</span>
           <h3>Proximity-Weighted Integration</h3>
-          <p>Feedback is incorporated into the LLM prompt that generates route recommendations. Weight is proportional to how closely the previous user's origin and destination match the current query — similar journeys receive more weight.</p>
+          <p>Feedback is incorporated into the LLM prompt that generates route recommendations. Weight is proportional to how closely the previous user's origin and destination match the current query and similar journeys receive more weight.</p>
         </div>
         <div class="card">
           <span class="card-icon">🤖</span>
           <h3>Future: Reinforcement Learning</h3>
-          <p>The current approach is a prompt-engineering solution — effective but limited at scale. Reinforcement Learning has been identified as the appropriate long-term mechanism for incorporating feedback directly into model scoring, improving continuously as data accumulates.</p>
+          <p>The current approach is a prompt-engineering solution. Reinforcement Learning has been identified as the appropriate long-term mechanism for incorporating feedback directly into model scoring, improving continuously as data accumulates.</p>
         </div>
       </div>
 
@@ -194,12 +181,12 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Privacy &amp; Data Security</h2>
-      <p class="lead">User privacy is a first-class design constraint, not an afterthought. Urban Access was built so that users have meaningful control over their own data.</p>
+      <p class="lead">User privacy is an important design constraint, not an afterthought. Urban Access was built so that users have meaningful control over their own data.</p>
 
       <ul class="check-list mt-3">
-        <li>All survey data used for label calibration is fully anonymised — no personally identifiable information was collected during the survey campaign</li>
+        <li>All survey data used for label calibration is fully anonymised and no personally identifiable information was collected during the survey campaign except if users wanted to optionally provide their email for progress updates</li>
         <li>User accounts and associated feedback data are stored in Supabase with enterprise-grade security and row-level access controls</li>
-        <li>Users can delete their account and all associated feedback data at any time from within the application — no lock-in</li>
+        <li>Users can delete their account and all associated feedback data at any time from within the application</li>
         <li>No movement data (journey records) is retained beyond what is necessary for the proximity-weighted feedback calculation</li>
         <li>Feedback data is never sold to or shared with third parties</li>
       </ul>
@@ -220,7 +207,7 @@
 <footer>
   <div class="footer-inner">
     <div>
-      <span class="brand">Urban <span>Access</span></span>
+      <span class="brand">Urban<span>Access</span></span>
       <p>AI-powered accessible routing for Montreal.<br>Built at the AI4Good Lab — Demo Day 2026.</p>
     </div>
     <nav>
