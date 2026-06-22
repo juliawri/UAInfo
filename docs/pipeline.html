@@ -106,18 +106,18 @@
           <p>The MAE encoder (~85M parameters of a Vision Transformer-Base architecture) was then used as the backbone initialisation for all subsequent supervised fine-tuning passes and replaced the standard ImageNet starting point.</p>
         </div>
         <div>
-          <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center">
-            <div style="display:flex;gap:0.75rem;justify-content:center;width:100%">
-              <figure style="margin:0;text-align:center;flex:1">
+          <div class="mae-images">
+            <div class="mae-images-row">
+              <figure class="mae-fig">
                 <img src="images/mae_original.png" alt="Original street image" style="width:100%;border-radius:6px;border:1px solid var(--border)">
                 <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Original</figcaption>
               </figure>
-              <figure style="margin:0;text-align:center;flex:1">
+              <figure class="mae-fig">
                 <img src="images/mae_masked_input.png" alt="Image with patches masked" style="width:100%;border-radius:6px;border:1px solid var(--border)">
                 <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Masked input</figcaption>
               </figure>
             </div>
-            <figure style="margin:0;text-align:center;width:calc(50% - 0.375rem)">
+            <figure class="mae-fig mae-single">
               <img src="images/mae_reconstruction.png" alt="MAE reconstruction output" style="width:100%;border-radius:6px;border:1px solid var(--border)">
               <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Reconstruction</figcaption>
             </figure>
@@ -328,7 +328,7 @@
         <div>
           <figure style="margin:0">
             <img src="images/surveyed_locations_map.png" alt="Map of Montreal showing the 18 locations surveyed for the VLM validation study" style="width:100%;border-radius:8px;border:1px solid var(--border)">
-            <figcaption style="font-size:0.82rem;color:var(--text-muted);margin-top:0.5rem;text-align:center">The 41 Montreal locations where human accessibility surveys were conducted and used as ground truth for the validation study.</figcaption>
+            <figcaption style="font-size:0.82rem;color:var(--text-muted);margin-top:0.5rem;text-align:center">The 18 Montreal locations where human accessibility surveys were conducted and used as ground truth for the validation study.</figcaption>
           </figure>
         </div>
       </div>
@@ -395,10 +395,6 @@
   <div class="footer-copyright">AI4Good Lab &middot; Montreal &middot; June 2026</div>
 </footer>
 
-<script>
-  document.getElementById('hamburger').addEventListener('click', function() {
-    document.getElementById('navLinks').classList.toggle('open');
-  });
-</script>
+<script src="nav.js"></script>
 </body>
 </html>
