@@ -10,7 +10,7 @@
 <body>
 
 <nav>
-  <a href="index.html" class="brand">Urban<span>Access</span></a>
+  <a href="index.html" class="brand">Urban <span>Access</span></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
     <li><a href="community.html">Problem &amp; Community</a></li>
@@ -27,7 +27,7 @@
 
   <div class="page-hero">
     <h1>Dataset</h1>
-    <p>No publicly available dataset combined street-level imagery with per-mobility-aid accessibility labels at scale for Canadian cities. We built one — from scratch.</p>
+    <p>No publicly available dataset combined street-level imagery with per-mobility-aid accessibility labels at scale for Canadian cities. We built one from scratch to help address this gap.</p>
   </div>
 
   <!-- ── ACCESSIBILITY MAP ── -->
@@ -37,7 +37,7 @@
       <h2 class="section-title">Explore our Dataset</h2>
       <div class="map-panel">
         <div class="map-panel-header">
-          <span class="map-panel-title">Montreal — Sidewalk Accessibility</span>
+          <span class="map-panel-title">Montreal Sidewalk Accessibility</span>
           <span class="map-panel-sub">14,000+ locations · click any point for details</span>
         </div>
         <div id="mtl-map"></div>
@@ -48,7 +48,7 @@
             <span>2 — Moderate</span>
             <span>4 — Accessible</span>
           </div>
-          <p class="legend-caption">Avg. score across 5 mobility aid types &amp; 3 camera views. Click any point for details.</p>
+          <p class="legend-caption">Average score across 5 mobility aid types &amp; 3 camera views. Click any point for details.</p>
         </div>
       </div>
     </div>
@@ -59,20 +59,20 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">Ground-Truth Survey Campaign</h2>
-      <p class="lead">To build credible accessibility labels, the team conducted a structured survey campaign — presenting real Montreal street images to community members and disability advocates for manual rating.</p>
+      <p class="lead">To build credible accessibility labels, the team conducted a structured survey campaign where we presented real Montreal street images to community members and disability advocates for manual rating.</p>
 
       <div class="two-col">
         <div>
-          <p>Participants were shown street-level photographs of Montreal sidewalks and asked to rate each image on a scale of 0 to 4 — from <em>Not Accessible</em> to <em>Fully Accessible</em> — for their specific mobility aid. Survey distribution was supported by Promo-Accès and extended through Rashid Mushkani's network to reach a diverse cross-section of the Montreal disability community.</p>
-          <p class="mt-2">Survey responses could not serve as direct training labels at this scale — 154 ratings across 76 images is too small to train a Vision Transformer from scratch. But they served two critical functions:</p>
+          <p>Participants were shown street-level photographs of Montreal sidewalks and asked to rate each image on a scale of 0 to 4 — from <em>Not Accessible</em> to <em>Fully Accessible</em> — for their specific mobility aid. Survey distribution was supported by Promo-Accès and extended through 30+ disability community organizations to reach a diverse cross-section of the Montreal disability community.</p>
+          <p class="mt-2">Survey responses could not serve as direct training labels at this scale as 154 ratings across 76 images is too small to train a Vision Transformer from scratch. But they served two critical functions:</p>
           <ul class="styled-list mt-2 mb-2">
             <li><strong>Calibration:</strong> The survey statistics (mean and standard deviation per mobility aid type) were used to recalibrate AI-generated labels from Gemini 2.5 Flash to match human perception. See <a href="pipeline.html">ML Pipeline</a> for the full methodology.</li>
             <li><strong>Validation:</strong> The survey provided partial external validation of the VLM scoring approach — evidence that human raters and AI raters are measuring something comparable, even if not identical.</li>
           </ul>
-          <p>All survey data was fully anonymised. Participants rated street images only — no personally identifiable information was collected.</p>
+          <p>All survey data was fully anonymised. Participants rated street images only and no personally identifiable information was collected.</p>
         </div>
         <div>
-          <p class="text-small text-muted mb-2">Below is an example image pair from the survey — each location was represented by a <strong>front-facing</strong> and <strong>back-facing</strong> photograph, giving respondents a complete view of the sidewalk segment before rating its accessibility.</p>
+          <p class="text-small text-muted mb-2">Below is an example image pair from the survey. Each location was represented by a <strong>front-facing</strong> and <strong>back-facing</strong> photograph, giving respondents a complete view of the sidewalk segment before rating its accessibility.</p>
           <figure style="margin:0 0 0.75rem;">
             <img src="images/KR_09_F.png" alt="Front-facing street-level photograph of a Montreal sidewalk location used in the accessibility survey" style="width:100%;border-radius:8px;display:block;">
             <figcaption style="font-size:0.78rem;color:var(--text-muted,#666);margin-top:0.4rem;text-align:center;">Front view</figcaption>
@@ -94,7 +94,7 @@
             <tr><td>Responses collected</td><td>154 rated image–aid pairs across 76 unique street images</td></tr>
             <tr><td>Aid types covered</td><td>Manual wheelchair, electric wheelchair, walker, walking cane, mobility scooter, mobility impairment without aid</td></tr>
             <tr><td>Rating scale</td><td>0–4 (0 = completely inaccessible, 4 = fully accessible)</td></tr>
-            <tr><td>Data handling</td><td>Fully anonymised; no personally identifiable information collected; participants rated images only</td></tr>
+            <tr><td>Data handling</td><td>Fully anonymised; no personally identifiable information collected except optionally for participants' emails if they wanted to receive updates on the project; participants rated images only</td></tr>
           </tbody>
         </table>
       </div>
@@ -121,7 +121,7 @@
         </figure>
         <figure class="survey-figure">
           <img src="images/survey-4.png" alt="Horizontal bar chart of top accessibility barriers, led by Obstacles and Unkept Sidewalk" class="survey-chart">
-          <figcaption>Top barriers identified by respondents. Obstacles and unkept sidewalks dominated — directly informing which visual features the model was trained to detect.</figcaption>
+          <figcaption>Top barriers identified by respondents. Obstacles and unkept sidewalks dominated and directly informed which visual features the model was trained to detect.</figcaption>
         </figure>
       </div>
 
@@ -154,7 +154,7 @@
 
       <div class="two-col">
         <div>
-          <p>Mapillary is an open-source, crowd-sourced street-level imagery platform — similar to Google Street View but with a public API and no licensing restrictions. Images were retrieved by geographic coordinate, allowing structured collection across Montreal.</p>
+          <p>Mapillary is an open-source, crowd-sourced street-level imagery platformv and is similar to Google Street View but has a public API and no licensing restrictions. Images were retrieved by geographic coordinate, allowing structured collection across Montreal.</p>
           <ul class="styled-list mt-2 mb-2">
             <li>Coordinates sampled near Montreal transit stations (bus stops, metro stations) and across Montreal Island</li>
             <li>~14,000 unique coordinate locations collected</li>
@@ -176,9 +176,9 @@
     <div class="container">
       <hr class="section-rule">
       <h2 class="section-title">AI Labelling with Gemini 2.5 Flash</h2>
-      <p class="lead">Manual labelling of 14,000+ locations across six mobility aid types would require approximately 500,000 individual human ratings — infeasible at project scale.</p>
+      <p class="lead">Manual labelling of 14,000+ locations across six mobility aid types would require approximately 250,000 individual human ratings, which is infeasible in three weeks.</p>
 
-      <p>Instead, Gemini 2.5 Flash was used to generate accessibility scores programmatically. For each image, Gemini was prompted to rate accessibility for each mobility aid type on a 0–4 integer scale, with a structured text justification. Total output: <strong>31,887 labelled rows</strong>.</p>
+      <p>Instead, Gemini 2.5 Flash was used to generate accessibility scores programmatically. For each image, Gemini was prompted to rate accessibility for each mobility aid type on a 0–4 integer scale, with a structured text justification. Total output: <strong>42,342 labelled rows, 31,887 of which could be used to detect sidewalk qualtiy.</strong>.</p>
 
       <div class="table-wrap mt-3">
         <table class="data-table">
@@ -194,8 +194,8 @@
         </table>
       </div>
 
-      <h3 class="subsection">Label Calibration — A Novel Methodological Contribution</h3>
-      <p>Raw Gemini scores have a different statistical distribution than human survey ratings — a systematic bias arising from the model's different interpretation of the 0–4 scale. Left uncorrected, training labels would be systematically offset from human judgement.</p>
+      <h3 class="subsection">Label Calibration</h3>
+      <p>Raw Gemini scores have a different statistical distribution than human survey ratings, an unfortunate systematic bias arising from the model's different interpretation of the 0–4 scale. Left uncorrected, training labels would be systematically offset from human judgement.</p>
       <p>The recalibration procedure uses z-score normalisation to map Gemini scores into the same mean and standard deviation as the human survey responses for each mobility aid type, then applies a binary threshold:</p>
 
       <div class="formula-box">
@@ -236,8 +236,8 @@
 <footer>
   <div class="footer-inner">
     <div>
-      <span class="brand">Urban<span>Access</span></span>
-      <p>AI-powered accessible routing for Montreal.<br>Built at the AI4Good Lab — Demo Day 2026.</p>
+      <span class="brand">Urban <span>Access</span></span>
+      <p>AI-powered accessible routing for Montreal.<br>Built at the AI4Good Lab: Demo Day 2026.</p>
     </div>
     <nav>
       <a href="index.html">Home</a>
