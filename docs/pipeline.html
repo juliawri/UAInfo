@@ -217,37 +217,37 @@
           <tbody>
             <tr class="row-highlight">
               <td>Pass 1 ★ (Deployed)</td>
-              <td>72.%</td>
+              <td>72.6%</td>
               <td>76.1%</td>
               <td>Baseline: MAE encoder weights, standard dropout (0.2), lr=1e-5 Phase 2, all 6 output heads</td>
             </tr>
             <tr>
               <td>Pass 2</td>
-              <td>0.669</td>
+              <td>66.9%</td>
               <td>—</td>
               <td>Added label smoothing (0.1), increased dropout (0.2→0.35), reduced lr in Phase 2</td>
             </tr>
             <tr>
               <td>Pass 3</td>
-              <td>0.641</td>
+              <td>64.1%</td>
               <td>—</td>
               <td>Added weighted random sampling to address walker class imbalance</td>
             </tr>
             <tr>
               <td>Pass 4</td>
-              <td>0.685</td>
+              <td>68.5%</td>
               <td>~79.5%</td>
               <td>Removed walker class head; removed weighted sampling; dropout back to 0.2</td>
             </tr>
             <tr>
               <td>Pass 5</td>
-              <td>0.651</td>
+              <td>65.1%</td>
               <td>—</td>
               <td>Downsampled majority classes in training data</td>
             </tr>
             <tr>
               <td>Pass 6</td>
-              <td>0.608</td>
+              <td>60.8%</td>
               <td>—</td>
               <td>Added more data, changed walker threshold, no downsampling</td>
             </tr>
