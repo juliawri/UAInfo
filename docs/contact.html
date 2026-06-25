@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Urban Access</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .contact-wrap {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+    .contact-wrap h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .contact-wrap .lead {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .email-link {
+      display: inline-block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--teal-light);
+      text-decoration: none;
+      border-bottom: 2px solid var(--sky-dark);
+      padding-bottom: 2px;
+      transition: color 0.18s, border-color 0.18s;
+    }
+    .email-link:hover {
+      color: var(--orange);
+      border-color: var(--orange);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="brand">Urban <span>Access</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="community.html">Problem &amp; Community</a></li>
+    <li><a href="pipeline.html">ML Pipeline</a></li>
+    <li><a href="dataset.html">Dataset</a></li>
+    <li><a href="ethics.html">Ethics</a></li>
+    <li><a href="application.html">The App</a></li>
+    <li><a href="impact.html">Impact &amp; Vision</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<main style="padding-top: var(--nav-h);">
+  <div class="contact-wrap">
+    <h1>Get in Touch</h1>
+    <p class="lead">Questions about Urban Access? We'd love to hear from you.</p>
+
+    <p class="email-link">julia [dot] wright2 [at] mail.mcgill.ca</p>
+  </div>
+</main>
+
+<script src="nav.js"></script>
+</body>
+</html>
